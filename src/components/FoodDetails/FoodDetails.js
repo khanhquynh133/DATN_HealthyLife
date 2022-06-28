@@ -1,31 +1,40 @@
 /** @format */
 
-import { faEdit, faWindowClose } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useEffect, useState } from "react";
-import { useHistory, useParams } from "react-router-dom";
-import allFoods from "../../fakeData/index";
-import "./FoodDetails.css";
+import { faEdit, faWindowClose } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory, useParams } from 'react-router-dom';
+import allFoods from '../../fakeData/index';
+import './FoodDetails.css';
+import { getRecipeById } from '../../stores/recipe/recipesSlice';
 
 const FoodDetails = () => {
-	// let user = JSON.parse(localStorage.getItem("user-info"));
-	let history = useHistory();
+  // let user = JSON.parse(localStorage.getItem("user-info"));
+  let history = useHistory();
+  const dispatch = useDispatch();
+  const { id } = useParams();
+  const { recipe } = useSelector((state) => state.recipes);
 
-	const { id } = useParams();
-	// const currentFood = allFoods.find((food) => food.id === id);
+  useEffect(() => {
+    dispatch(getRecipeById(id));
+  }, [id, dispatch]);
+  console.log({ recipe });
 
-	// useEffect(() => {
-	// 	window.scrollTo(0, 0);
-	// }, []);
+  // const currentFood = allFoods.find((food) => food.id === id);
 
-	// function goBack() {
-	// 	history.push("/explore");
-	// 	window.scrollTo(0, 9999);
-	// }
+  // useEffect(() => {
+  // 	window.scrollTo(0, 0);
+  // }, []);
 
-	return (
-		<div className='food-details container scrollable'>
-			{/* <div className='row mb-5 my-5'>
+  // function goBack() {
+  // 	history.push("/explore");
+  // 	window.scrollTo(0, 9999);
+  // }
+
+  return (
+    <div className="food-details container scrollable">
+      {/* <div className='row mb-5 my-5'>
 				<div className='col-md-7 pr-md-4'>
 					<h1 className='type-name my-3'>{currentFood.name}</h1>
 					<h5 className='my-3'>
@@ -83,8 +92,8 @@ const FoodDetails = () => {
 					</div>
 				)}
 			</div> */}
-		</div>
-	);
+    </div>
+  );
 };
 
 export default FoodDetails;
