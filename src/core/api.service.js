@@ -5,7 +5,7 @@ import authStorageService from "./authStorage.service";
 
 // const apiService = () => {
 //   const defaultOptions = {
-//     baseURL: process.env.REACT_APP_BASE_API_URL,
+// baseURL: process.env.REACT_APP_BASE_API_URL,
 //     headers: {
 //       'Content-Type': 'application/json',
 //     },
@@ -26,6 +26,8 @@ const apiService = (moreOptions) => {
 	const token = authStorageService().getToken();
 	const options = {
 		...moreOptions,
+		baseURL: process.env.REACT_APP_BASE_API_URL,
+
 		headers: {
 			...moreOptions?.headers,
 			Authorization: token ? `Bearer ${token}` : "",

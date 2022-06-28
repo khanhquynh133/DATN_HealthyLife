@@ -4,11 +4,11 @@ import api from "../../core/api.service";
 import authStorageService from "../../core/authStorage.service";
 import { ENDPOINT } from "../../core/constants";
 
-const endpoint = ENDPOINT.USERS;
+const endpoint = ENDPOINT.AUTH;
 
 // Register user
 const register = async (userData) => {
-	const response = await api().post(`${endpoint}/signup`, userData);
+	const response = await api().post(`${endpoint}/register`, userData);
 	if (response.data) {
 		const { token } = response.data;
 		authStorageService().setToken(token);
@@ -18,7 +18,7 @@ const register = async (userData) => {
 
 // Login user
 const login = async (userData) => {
-	const response = await api().post(`${endpoint}/signin`, userData);
+	const response = await api().post(`${endpoint}/login`, userData);
 	if (response.data) {
 		const { token } = response.data;
 		authStorageService().setToken(token);

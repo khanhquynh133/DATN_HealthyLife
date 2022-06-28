@@ -8,6 +8,8 @@ import nutmilk from "../../images/foodicon/nutmilk.png";
 import airfryer from "../../images/foodicon/airfryer.png";
 import FoodItem from "../FoodItem/FoodItem";
 import "./OwnRecipes.css";
+import { useDispatch, useSelector } from "react-redux";
+import { getRecipesByUserId } from "../../stores/recipe/recipesSlice";
 
 const OwnRecipes = () => {
 	// const [searchQuery, setSearchQuery] = useState(null);
@@ -15,10 +17,14 @@ const OwnRecipes = () => {
 	// let user = JSON.parse(localStorage.getItem("user-info"));
 	// const [foods, setFoods] = useState([]);
 	// const [creator, setType] = useState("Air Fryer");
-	// useEffect(() => {
-	// 	setFoods(allFoods);
-	// }, []);
 	// const selectedType = foods.filter((food) => food.creator === user.email);
+
+	const dispatch = useDispatch();
+	const { ownRecipes } = useSelector((state) => state.recipes);
+	useEffect(() => {
+		dispatch(getRecipesByUserId(2));
+	}, []);
+	console.log(ownRecipes);
 
 	return (
 		<section className='food-area my-4'>

@@ -8,12 +8,15 @@ import "./SignUp.css";
 import Form from "../../utilities/Forms";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import { useDispatch } from "react-redux";
+import { register } from "../../stores/auth/authSlice";
 const SignUp = () => {
 	const [name, setName] = useState("");
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [validate, setValidate] = useState({});
 	const [showPassword, setShowPassword] = useState(false);
+	const dispatch = useDispatch();
 
 	const validateRegister = () => {
 		let isValid = true;
@@ -45,7 +48,7 @@ const SignUp = () => {
 		return isValid;
 	};
 
-	const register = (e) => {
+	const submitForm = (e) => {
 		e.preventDefault();
 
 		const validate = validateRegister();
@@ -53,6 +56,8 @@ const SignUp = () => {
 		if (validate) {
 			setValidate({});
 		}
+		const user = { username: name, email, password };
+		dispatch(register(user));
 		console.log(name, email, password);
 	};
 
@@ -72,7 +77,7 @@ const SignUp = () => {
 					</Link>
 				</div>
 
-				<form className='py-3'>
+				<form className='py-3' onSubmit={submitForm}>
 					<div className='form-group'>
 						<input
 							type='text'
@@ -173,10 +178,7 @@ const SignUp = () => {
 					</div>
 
 					<div className='form-group text-center my-2'>
-						<button
-							className='btn btn-warning fw-bolder'
-							type='submit'
-							onClick={register}>
+						<button className='btn btn-warning fw-bolder' type='submit'>
 							Sign Up
 						</button>
 					</div>

@@ -9,15 +9,16 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import Form from "../../utilities/Forms";
 import Validate from "../SignIn/ValidateSignInForm";
+import { useDispatch } from "react-redux";
+import { login } from "../../stores/auth/authSlice";
 
 const SignIn = () => {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
-
 	const [showPassword, setShowPassword] = useState(false);
 	const [validate, setValidate] = useState({});
-
 	const history = useHistory();
+	const dispatch = useDispatch();
 
 	const togglePassword = (e) => {
 		if (showPassword) {
@@ -59,8 +60,8 @@ const SignIn = () => {
 		if (validate) {
 			setValidate({});
 		}
-
-		console.log(email, password);
+		const user = { email, password };
+		dispatch(login(user));
 	};
 
 	return (
@@ -71,7 +72,7 @@ const SignIn = () => {
 						<img src={Logo} alt='' />
 					</Link>
 				</div>
-				<form className='py-1' autoComplete={"off"}>
+				<form className='py-1' autoComplete={"off"} onSubmit={submitForm}>
 					<h1 className='lead text-center py-3'>Welcome back!</h1>
 					<div className='form-group'>
 						<input
@@ -127,10 +128,7 @@ const SignIn = () => {
 						</div>
 					</div>
 					<div className='form-group text-center'>
-						<button
-							className='btn btn-warning fw-bolder'
-							type='submit'
-							onClick={submitForm}>
+						<button className='btn btn-warning fw-bolder' type='submit'>
 							Sign In
 						</button>
 					</div>

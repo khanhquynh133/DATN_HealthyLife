@@ -5,3 +5,8 @@ export const ENDPOINT = {
 	AUTH: "auth",
 	RECIPES: "recipes",
 };
+export const TYPE = {
+	AIRFRYER: 1,
+	JUICE: 2,
+	NUTMILK: 3,
+};

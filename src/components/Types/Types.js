@@ -8,20 +8,28 @@ import nutmilk from "../../images/foodicon/nutmilk.png";
 import airfryer from "../../images/foodicon/airfryer.png";
 import FoodItem from "../FoodItem/FoodItem";
 import "./Foods.css";
+import { useDispatch, useSelector } from "react-redux";
+import { getRecipesByTypeId } from "../../stores/recipe/recipesSlice";
+import { TYPE } from "../../core/constants";
 
 const Types = () => {
 	// const [searchQuery, setSearchQuery] = useState(null);
 	// const getQuery = (event) => setSearchQuery(event.target.value);
-	const [foods, setFoods] = useState([]);
-	const [type, setType] = useState("Air Fryer");
+	const [type, setType] = useState(TYPE.AIRFRYER);
+	const dispatch = useDispatch();
+	const { recipes } = useSelector((state) => state.recipes);
+	console.log(useSelector((state) => state.recipes));
 	useEffect(() => {
-		setFoods(allFoods);
-	}, []);
-	const selectedType = foods.filter((food) => food.type === type);
+		dispatch(getRecipesByTypeId(type));
 
+		// const recipe = { username: name, email, password };
+		// dispatch(register(user));
+		// console.log(name, email, password);
+	}, []);
+	console.log(recipes);
 	return (
 		<section className='food-area my-4'>
-			<div className='container'>
+			{/* <div className='container'>
 				<div>
 					<h1 className='type-name text-center'>{type}</h1>
 				</div>
@@ -73,7 +81,7 @@ const Types = () => {
 						<FoodItem food={food} key={food.id} />
 					))}
 				</div>
-			</div>
+			</div> */}
 		</section>
 	);
 };
