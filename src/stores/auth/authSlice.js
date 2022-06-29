@@ -10,7 +10,7 @@ const token = authStorageService().getToken();
 const user = authStorageService().getUserInfo();
 
 const initialState = {
-	user: user,
+	loginedUser: null,
 	isError: "",
 	isSuccess: "",
 	isLoading: false,
@@ -94,7 +94,7 @@ export const authSlice = createSlice({
 			.addCase(login.fulfilled, (state, action) => {
 				state.isLoading = false;
 				state.isSuccess = authType.LOGIN;
-				state.user = action.payload;
+				state.loginedUser = action.payload;
 				console.log(action.payload);
 			})
 			.addCase(login.rejected, (state, action) => {

@@ -30,7 +30,8 @@ const apiService = (moreOptions) => {
 
 		headers: {
 			...moreOptions?.headers,
-			Authorization: token ? `Bearer ${token}` : "",
+			//Authorization: token ? `Bearer ${token}` : "",
+			Authorization: "Basic a2hhbmhxdXluaDEzM0BnbWFpbC5jb206YWJjQDEyMw==",
 		},
 	};
 

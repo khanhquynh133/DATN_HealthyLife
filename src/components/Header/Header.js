@@ -22,7 +22,7 @@ import userPhoto from "../../images/Group 2.png";
 
 const Header = () => {
 	//const auth = useAuth();
-	let user = JSON.parse(localStorage.getItem("user-info"));
+	//let user = JSON.parse(localStorage.getItem("user-info"));
 	const history = useHistory();
 	function logout() {
 		localStorage.clear();
@@ -72,10 +72,10 @@ const Header = () => {
 					</li>
 				</ul>
 				<ul className='navbar-nav align-items-center'>
-					<li className='nav-item'>
+					{/* <li className='nav-item'>
 						{localStorage.getItem("user-info") ? (
 							<Link to='/profile' className='nav-link'>
-								{/* {auth.user.displayName} tên user*/}
+								{auth.user.displayName} tên user
 								{user.email}
 								<img
 									className='ml-3 circle'
@@ -88,7 +88,7 @@ const Header = () => {
 						) : (
 							<Link></Link>
 						)}
-					</li>
+					</li> */}
 
 					<li className='nav-item'>
 						{localStorage.getItem("user-info") ? (
@@ -111,41 +111,6 @@ const Header = () => {
 						<Link to='/signin' className='nav-link'>
 							<button className='btn btn-warning rounded-pill '>Sign In</button>
 						</Link>
-					</li> */}
-					{/* <li className='nav-item'>
-						{auth.user ? (
-							<Link to='/account' className='nav-link'>
-								{auth.user.displayName}
-								<img
-									className='ml-3 circle'
-									src={auth.user.photoURL ? auth.user.photoURL : userPhoto}
-									width='35px'
-									alt=''
-								/>
-							</Link>
-						) : (
-							<Link to='/signup' className='nav-link'>
-								Login
-							</Link>
-						)}
-					</li>
-
-					<li className='nav-item'>
-						{auth.user ? (
-							<Link to='/' className='nav-link'>
-								<button
-									onClick={() => {
-										auth.signOut();
-									}}
-									className='btn btn-danger btn-rounded'>
-									Sign Out
-								</button>
-							</Link>
-						) : (
-							<Link to='/signup' className='nav-link'>
-								<button className='btn btn-danger btn-rounded'>Sign Up</button>
-							</Link>
-						)}
 					</li> */}
 				</ul>
 			</div>

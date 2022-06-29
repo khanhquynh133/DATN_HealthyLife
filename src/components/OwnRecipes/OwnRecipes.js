@@ -10,7 +10,7 @@ import FoodItem from "../FoodItem/FoodItem";
 import "./OwnRecipes.css";
 import { useDispatch, useSelector } from "react-redux";
 import { getRecipesByUserId } from "../../stores/recipe/recipesSlice";
-
+import axios from "axios";
 const OwnRecipes = () => {
 	// const [searchQuery, setSearchQuery] = useState(null);
 	// const getQuery = (event) => setSearchQuery(event.target.value);
@@ -21,10 +21,21 @@ const OwnRecipes = () => {
 
 	const dispatch = useDispatch();
 	const { ownRecipes } = useSelector((state) => state.recipes);
+	const { loginedUser } = useSelector((state) => state.auth);
+
 	useEffect(() => {
 		dispatch(getRecipesByUserId(2));
+		const headers = {
+			Authorization: "Basic a2hhbmhxdXluaDEzM0BnbWFpbC5jb206YWJjQDEyMw==",
+		};
+		axios
+			.get("https://healthy-life-server.azurewebsites.net/api/recipes/user/2", {
+				headers,
+			})
+			.then((response) => console.log(response));
 	}, []);
-	console.log(ownRecipes);
+	// console.log(loginedUser);
+	// console.log(ownRecipes);
 
 	return (
 		<section className='food-area my-4'>

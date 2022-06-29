@@ -1,99 +1,73 @@
 /** @format */
 
-import { faEdit, faWindowClose } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useHistory, useParams } from 'react-router-dom';
-import allFoods from '../../fakeData/index';
-import './FoodDetails.css';
-import { getRecipeById } from '../../stores/recipe/recipesSlice';
+import { faEdit, faWindowClose } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory, useParams } from "react-router-dom";
+import "./FoodDetails.css";
+import { getRecipeById } from "../../stores/recipe/recipesSlice";
 
 const FoodDetails = () => {
-  // let user = JSON.parse(localStorage.getItem("user-info"));
-  let history = useHistory();
-  const dispatch = useDispatch();
-  const { id } = useParams();
-  const { recipe } = useSelector((state) => state.recipes);
-
-  useEffect(() => {
-    dispatch(getRecipeById(id));
-  }, [id, dispatch]);
-  console.log({ recipe });
-
-  // const currentFood = allFoods.find((food) => food.id === id);
-
-  // useEffect(() => {
-  // 	window.scrollTo(0, 0);
-  // }, []);
-
-  // function goBack() {
-  // 	history.push("/explore");
-  // 	window.scrollTo(0, 9999);
-  // }
-
-  return (
-    <div className="food-details container scrollable">
-      {/* <div className='row mb-5 my-5'>
-				<div className='col-md-7 pr-md-4'>
-					<h1 className='type-name my-3'>{currentFood.name}</h1>
-					<h5 className='my-3'>
-						👥 Servings: {currentFood.servings} &nbsp; &nbsp; &nbsp; &nbsp;⏳
-						Total time: {""}
-						{currentFood.time}
-					</h5>
-					<h5></h5>
-					<h4> 📜 Ingredients </h4>
-					<ul>
-						{currentFood.ingredients.map((ingredient) => (
-							<li>
-								{ingredient.amount} {ingredient.unit} {ingredient.name}
-							</li>
-						))}
-					</ul>
-					<h4> 🍴 Directions </h4>
-					<ul>
-						{currentFood.directions.map((direction) => (
-							<li>
-								Step {direction.step}: {direction.direction}
-							</li>
-						))}
-					</ul>
-				</div>
-
-				<div className='col-md-5 order-first order-md-last'>
-					<img
-						className='img-fluid mb-2'
-						src={currentFood.img}
-						alt='food-image'
-					/>
-				</div>
-			</div>
-			<div className='text-center'>
-				{currentFood.creator === user.email ? (
-					<div>
-						<button className='btn btn-danger rounded-pill my-3 me-md-2'>
-							<FontAwesomeIcon icon={faEdit} />
-							<span> Edit </span>
-						</button>
-						<button
-							onClick={goBack}
-							className='btn btn-danger rounded-pill my-3'>
-							<FontAwesomeIcon icon={faWindowClose} />
-							<span> Close </span>
-						</button>
+	let history = useHistory();
+	const dispatch = useDispatch();
+	const { id } = useParams();
+	const { detailRecipe } = useSelector((state) => state.recipes);
+	console.log(detailRecipe);
+	console.log(+detailRecipe?.recipe?.id_recipe);
+	console.log(id);
+	useEffect(() => {
+		window.scrollTo(0, 0);
+		dispatch(getRecipeById(id));
+	}, [id, dispatch]);
+	function goBack() {
+		history.push("/explore");
+		window.scrollTo(0, 9999);
+	}
+	return (
+		<div className='food-details container scrollable'>
+			{detailRecipe && detailRecipe?.recipe?.id_recipe == id && (
+				<div className='row mb-5 my-5'>
+					<div className='col-md-7 pr-md-4'>
+						<h1 className='type-name my-3'>{detailRecipe.recipe.name}</h1>
+						<h5 className='my-3'>
+							🖋 Description: {detailRecipe.recipe.description}
+						</h5>
+						<h5 className='my-3'>
+							👥 Servings: {detailRecipe.recipe.servings} &nbsp; &nbsp; &nbsp;
+							&nbsp;⏳ Total time: {""}
+							{detailRecipe.recipe.time}
+						</h5>
+						<h5></h5>
+						<h4> 📜 Ingredients </h4>
+						<ul>
+							{detailRecipe.recipe.ingredients.map((ingredient) => (
+								<li>
+									{ingredient.amount} {ingredient.unit} {ingredient.ingredient}
+								</li>
+							))}
+						</ul>
+						<h4> 🍴 Directions </h4>
+						<ul>
+							{detailRecipe.recipe.directions.map((direction) => (
+								<li>
+									Step {direction.step}: {direction.direction}
+								</li>
+							))}
+						</ul>
 					</div>
-				) : (
-					<div onClick={goBack}>
-						<button className='btn btn-danger rounded-pill my-3'>
-							<FontAwesomeIcon icon={faWindowClose} />
-							<span> Close </span>
-						</button>
+
+					<div className='col-md-5 order-first order-md-last'>
+						<img
+							className='img-fluid mb-2'
+							src={detailRecipe.recipe.image}
+							alt='food-image'
+						/>
 					</div>
-				)}
-			</div> */}
-    </div>
-  );
+				</div>
+			)}
+		</div>
+	);
 };
 
 export default FoodDetails;

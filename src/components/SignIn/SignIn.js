@@ -9,7 +9,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import Form from "../../utilities/Forms";
 import Validate from "../SignIn/ValidateSignInForm";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../stores/auth/authSlice";
 
 const SignIn = () => {
@@ -19,7 +19,12 @@ const SignIn = () => {
 	const [validate, setValidate] = useState({});
 	const history = useHistory();
 	const dispatch = useDispatch();
-
+	const { loginedUser } = useSelector((state) => state.auth);
+	useEffect(() => {
+		if (loginedUser) {
+			history.push("/");
+		}
+	}, [loginedUser]);
 	const togglePassword = (e) => {
 		if (showPassword) {
 			setShowPassword(false);
