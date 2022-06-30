@@ -19,7 +19,6 @@ const SearchResult = () => {
 	useEffect(() => {
 		dispatch(searchRecipesByName(name));
 	}, [name, dispatch]);
-	console.log(searchRecipe);
 
 	return (
 		<section className='food-area my-5'>
@@ -29,7 +28,7 @@ const SearchResult = () => {
 					{searchRecipe.map((food) => (
 						<FoodItem key={food.id_recipe} food={food}></FoodItem>
 					))}
-					{SearchResult.length === 0 && (
+					{searchRecipe.length === 0 && (
 						<h1 className='col-12 display-5 text-center'>No food found!</h1>
 					)}
 				</div>

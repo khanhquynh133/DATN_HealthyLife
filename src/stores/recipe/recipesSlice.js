@@ -8,6 +8,7 @@ const initialState = {
 	recipes: [],
 	ownRecipes: [],
 	detailRecipe: [],
+	editRecipe: [],
 	searchRecipe: [],
 	isError: "",
 	isSuccess: "",
@@ -158,7 +159,7 @@ export const questionSlice = createSlice({
 				state.isLoading = false;
 				state.isSuccess = recipesType.GET_RECIPE_BY_ID;
 				state.detailRecipe = action.payload;
-				console.log(action.payload);
+				state.editRecipe = action.payload;
 			})
 			.addCase(getRecipeById.rejected, (state, action) => {
 				state.isLoading = false;

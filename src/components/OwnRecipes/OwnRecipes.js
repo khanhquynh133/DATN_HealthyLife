@@ -18,33 +18,43 @@ const OwnRecipes = () => {
 	// const [foods, setFoods] = useState([]);
 	// const [creator, setType] = useState("Air Fryer");
 	// const selectedType = foods.filter((food) => food.creator === user.email);
-
+	const [data, setData] = useState([]);
 	const dispatch = useDispatch();
 	const { ownRecipes } = useSelector((state) => state.recipes);
 	const { loginedUser } = useSelector((state) => state.auth);
 
 	useEffect(() => {
 		dispatch(getRecipesByUserId(2));
+		// const headers = {
+		// 	Authorization: "Basic a2hhbmhxdXluaDEzM0BnbWFpbC5jb206YWJjQDEyMw==",
+		// };
+		// axios
+		// 	.get("https://healthy-life-server.azurewebsites.net/api/recipes/user/2", {
+		// 		headers,
+		// 	})
+		// 	.then((response) => console.log(response));
+		let token = "dHJpZHVuZ0BnbWFpbC5jb206dHJpZHVuZw==";
 		const headers = {
-			Authorization: "Basic a2hhbmhxdXluaDEzM0BnbWFpbC5jb206YWJjQDEyMw==",
+			Authorization: `Basic ${token}`,
 		};
 		axios
-			.get("https://healthy-life-server.azurewebsites.net/api/recipes/user/2", {
+			.get(`${process.env.REACT_APP_BASE_API_URL}recipes/user/8`, {
 				headers,
 			})
-			.then((response) => console.log(response));
+			.then((response) => setData(response.data));
 	}, []);
 	// console.log(loginedUser);
 	// console.log(ownRecipes);
+	console.log("Data trả về: ", data);
 
 	return (
 		<section className='food-area my-4'>
 			<div className='container'>
-				{/* <div className='row my-5'>
-					{selectedType.map((food) => (
-						<FoodItem food={food} key={food.id} />
+				<div className='row my-5'>
+					{data.map((food) => (
+						<FoodItem food={food} key={food.id_recipe} />
 					))}
-				</div> */}
+				</div>
 			</div>
 		</section>
 	);

@@ -14,7 +14,6 @@ const Types = () => {
 	const [type, setType] = useState(TYPE.AIRFRYER);
 	const dispatch = useDispatch();
 	const { recipes } = useSelector((state) => state.recipes);
-
 	const renderHeading = () => {
 		switch (type) {
 			case TYPE.AIRFRYER:
@@ -39,7 +38,9 @@ const Types = () => {
 				</div>
 				<nav>
 					<ul className='nav justify-content-center mt-4'>
-						<li className='nav-item' onClick={() => setType(TYPE.AIRFRYER)}>
+						<li
+							className='nav-item name-style'
+							onClick={() => setType(TYPE.AIRFRYER)}>
 							<span
 								to='Air Fryer'
 								className={
@@ -54,7 +55,9 @@ const Types = () => {
 								Air Fryer
 							</span>
 						</li>
-						<li className='nav-item' onClick={() => setType(TYPE.JUICE)}>
+						<li
+							className='nav-item name-style'
+							onClick={() => setType(TYPE.JUICE)}>
 							<span
 								to='Juice'
 								className={
@@ -64,7 +67,9 @@ const Types = () => {
 								Juice
 							</span>
 						</li>
-						<li className='nav-item' onClick={() => setType(TYPE.NUTMILK)}>
+						<li
+							className='nav-item name-style'
+							onClick={() => setType(TYPE.NUTMILK)}>
 							<span
 								to='Nut Milk'
 								className={

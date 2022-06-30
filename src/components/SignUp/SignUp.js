@@ -58,7 +58,6 @@ const SignUp = () => {
 		}
 		const user = { username: name, email, password };
 		dispatch(register(user));
-		console.log(name, email, password);
 	};
 
 	const togglePassword = (e) => {

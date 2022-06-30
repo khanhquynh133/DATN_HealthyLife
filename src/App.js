@@ -18,6 +18,7 @@ import OwnRecipes from "./components/OwnRecipes/OwnRecipes";
 import ListMembers from "./components/Admin/ListMembers";
 import DetailMember from "./components/Admin/DetailMember";
 import EditMember from "./components/Admin/EditMember";
+import EditFood from "./components/EditFood/EditFood";
 import React from "react";
 
 function App() {
@@ -79,6 +80,11 @@ function App() {
 			<Route path='/ownrecipes'>
 				<Header />
 				<OwnRecipes />
+				<Footer />
+			</Route>
+			<Route path='/editfood/:id'>
+				<Header />
+				<EditFood />
 				<Footer />
 			</Route>
 		</Switch>
