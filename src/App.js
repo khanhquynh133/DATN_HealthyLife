@@ -21,8 +21,20 @@ import EditMember from './components/Admin/EditMember';
 import EditFood from './components/EditFood/EditFood';
 import React from 'react';
 import NewRecipt from './components/NewRecipe';
+import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import authStorageService from './core/authStorage.service';
 
 function App() {
+  const { user } = useSelector((state) => state.auth);
+  const token = authStorageService().getToken();
+
+  useEffect(() => {
+    if (token && !user) {
+      // dispatch get user information
+    }
+  }, [user, token]);
+
   return (
     <Switch>
       <Route exact path="/">
