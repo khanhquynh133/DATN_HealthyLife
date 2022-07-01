@@ -18,14 +18,20 @@ const login = async (userData) => {
   const response = await api().post(`${endpoint}/login`, userData);
   const { email, password } = userData;
   if (response.data) {
-    const token = 'Basic ' + window.btoa(`${email}:${password}`);
+    const token = window.btoa(`${email}:${password}`);
     authStorageService().setToken(token);
   }
   return response.data;
 };
 
+// Get user info
+const getUserInfo = async () => {
+  const response = await api(true).get(`users/information`);
+  return response.data;
+};
+
 // Logout user
-const logout = () => {
+const logout = async () => {
   authStorageService().removeToken();
 };
 
@@ -43,6 +49,7 @@ const authService = {
   logout,
   login,
   updateUser,
+  getUserInfo,
 };
 
 export default authService;

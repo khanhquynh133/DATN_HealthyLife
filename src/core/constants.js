@@ -15,3 +15,8 @@ export const FORM_TYPE = {
   CREATE: 1,
   UPDATE: 2,
 };
+
+export const ROLE = {
+  ROLE_ADMIN: 1,
+  ROLE_USER: 2,
+};
