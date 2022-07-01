@@ -9,8 +9,7 @@ import "./EditFood.css";
 import { getRecipeById } from "../../stores/recipe/recipesSlice";
 import { Link } from "react-router-dom";
 
-const FormFood = (props) => {
-	const { id_recipe, image, name, time } = props.food.recipe;
+const FormFood = () => {
 	let history = useHistory();
 	function goBack() {
 		history.push("/");

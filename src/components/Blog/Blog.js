@@ -37,7 +37,9 @@ const Blog = () => {
 			<div className='container'>
 				<div className='row'>
 					<div className='col-12'>
-						<h3 className='text-center mt-2 header-text'>Healthy Life</h3>
+						<h3 className='text-center mt-2 header-text'>
+							<b>Healthy Life</b>
+						</h3>
 						<p className='mt-3 mb-5 text-center '>
 							Bring healthy recipe to you!
 						</p>
