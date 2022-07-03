@@ -6,18 +6,22 @@ import { FORM_TYPE } from '../../core/constants';
 import './RecipeForm.css';
 import { faClose, faPlus, faSave } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { createRecipe, updateRecipe } from '../../stores/recipe/recipesSlice';
 import { handleUpdateRecipeData } from '../../utilities/helper';
+import { useEffect } from 'react';
+import { recipesType } from '../../stores/recipe/recipesType';
 
 const RecipeForm = (props) => {
   const dispatch = useDispatch();
   const { formType, recipe } = props;
+  const history = useHistory();
   const defaultValues = recipe ? { ...recipe.recipe } : null;
   const { register, control, handleSubmit } = useForm({
     defaultValues,
   });
+  const { isSuccess, addRecipe } = useSelector((state) => state.recipes);
   console.log({ defaultValues });
 
   const {
@@ -60,6 +64,12 @@ const RecipeForm = (props) => {
       default:
     }
   };
+
+  useEffect(() => {
+    if (isSuccess === recipesType.CREATE_RECIPE) {
+      history.push(`food/${addRecipe.id_recipe}`);
+    }
+  }, [isSuccess, addRecipe, history]);
 
   return (
     <div className="recipe-form container scrollable">

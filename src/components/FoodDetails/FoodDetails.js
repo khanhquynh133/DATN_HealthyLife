@@ -6,7 +6,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import './FoodDetails.css';
-import { getRecipeById } from '../../stores/recipe/recipesSlice';
+import { deleteRecipe, getRecipeById } from '../../stores/recipe/recipesSlice';
 import { Link } from 'react-router-dom';
 import LoadingSpinner from '../LoadingSpinner';
 
@@ -25,6 +25,11 @@ const FoodDetails = () => {
     history.push('/explore');
     window.scrollTo(0, 9999);
   }
+
+  const handleDelete = () => {
+    dispatch(deleteRecipe(id));
+    history.push('/');
+  };
 
   if (isLoading) {
     return <LoadingSpinner />;
@@ -71,13 +76,22 @@ const FoodDetails = () => {
           </div>
           <div>
             {detailRecipe?.creator?.userId === loginedUser?.id_user && (
-              <Link
-                to={`/editfood/${id}`}
-                className="btn btn-danger rounded-pill my-3 me-md-2 name-type"
-              >
-                <FontAwesomeIcon icon={faEdit} />
-                <span> Edit </span>
-              </Link>
+              <>
+                <Link
+                  to={`/editfood/${id}`}
+                  className="btn btn-danger rounded-pill my-3 me-md-2 name-type"
+                >
+                  <FontAwesomeIcon icon={faEdit} />
+                  <span> Edit </span>
+                </Link>
+                <button
+                  className="btn btn-danger rounded-pill my-3 name-type"
+                  onClick={handleDelete}
+                >
+                  <FontAwesomeIcon icon={faClose} />
+                  <span> Delete </span>
+                </button>
+              </>
             )}
             <button
               className="btn btn-danger rounded-pill my-3 name-type"

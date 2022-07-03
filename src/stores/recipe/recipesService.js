@@ -41,11 +41,11 @@ const updateRecipe = async (data) => {
   return response.data;
 };
 
-// // Delete user question
-// const deleteQuestion = async (questionId: string) => {
-//   const response = await api().delete(`${endpoint}/${questionId}`);
-//   return response.data;
-// };
+// Delete recipe
+const deleteRecipe = async (recipeId) => {
+  const response = await api(true).delete(`${endpoint}/${recipeId}`);
+  return response.data;
+};
 
 const recipesService = {
   createRecipe,
@@ -54,6 +54,7 @@ const recipesService = {
   getRecipesByUserId,
   getRecipeById,
   searchRecipesByName,
+  deleteRecipe,
 };
 
 export default recipesService;

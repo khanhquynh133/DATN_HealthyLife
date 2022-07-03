@@ -102,18 +102,18 @@ export const updateRecipe = createAsyncThunk(
   }
 );
 
-// // Delete user question
-// export const deleteQuestion = createAsyncThunk(
-//   `question/${questionType.DELETE_QUESTION}`,
-//   async (id: string, thunkAPI) => {
-//     try {
-//       return await questionService.deleteQuestion(id);
-//     } catch (error: any) {
-//       const message = error?.response?.data?.message;
-//       return thunkAPI.rejectWithValue(message);
-//     }
-//   }
-// );
+// Delete recipe
+export const deleteRecipe = createAsyncThunk(
+  `question/${recipesType.DELETE_RECIPE}`,
+  async (id, thunkAPI) => {
+    try {
+      return await recipesService.deleteRecipe(id);
+    } catch (error) {
+      const message = error?.response?.data?.message;
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
 
 export const questionSlice = createSlice({
   name: 'question',
@@ -133,12 +133,12 @@ export const questionSlice = createSlice({
       })
       .addCase(createRecipe.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.isSuccess = recipesType.CREATE_RECIPES;
+        state.isSuccess = recipesType.CREATE_RECIPE;
         state.addRecipe = action.payload;
       })
       .addCase(createRecipe.rejected, (state, action) => {
         state.isLoading = false;
-        state.isError = recipesType.CREATE_RECIPES;
+        state.isError = recipesType.CREATE_RECIPE;
         state.message = action.payload;
       })
       .addCase(getRecipesByTypeId.pending, (state) => {
@@ -207,22 +207,19 @@ export const questionSlice = createSlice({
         state.isError = recipesType.UPDATE_RECIPE;
         state.message = action.payload;
         console.log('error', action.payload);
+      })
+      .addCase(deleteRecipe.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(deleteRecipe.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = recipesType.DELETE_RECIPE;
+      })
+      .addCase(deleteRecipe.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = recipesType.DELETE_RECIPE;
+        state.message = action.payload;
       });
-    // .addCase(deleteQuestion.pending, (state) => {
-    // 	state.isLoading = true;
-    // })
-    // .addCase(deleteQuestion.fulfilled, (state: any, action: any) => {
-    // 	state.isLoading = false;
-    // 	state.isSuccess = questionType.DELETE_QUESTION;
-    // 	state.userQuestions = state.userQuestions.filter(
-    // 		(question: Question) => question._id !== action.payload.id
-    // 	);
-    // })
-    // .addCase(deleteQuestion.rejected, (state, action: any) => {
-    // 	state.isLoading = false;
-    // 	state.isError = questionType.DELETE_QUESTION;
-    // 	state.message = action.payload;
-    // });
   },
 });
 
