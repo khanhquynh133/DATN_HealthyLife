@@ -43,7 +43,7 @@ export const adminGetAllUsers = createAsyncThunk(
 
 // update user by id
 export const adminUpdateUser = createAsyncThunk(
-  `user/${userType.ADMIN_GET_USER_BY_ID}`,
+  `user/${userType.ADMIN_UDPATE_USER}`,
   async (updatedData, thunkAPI) => {
     try {
       return await userService.adminUpdateUser(updatedData);
@@ -58,7 +58,7 @@ export const adminUpdateUser = createAsyncThunk(
 
 // Delete user by id
 export const adminDeleteUserById = createAsyncThunk(
-  `user/${userType.ADMIN_GET_USER_BY_ID}`,
+  `user/${userType.ADMIN_DELETE_USER}`,
   async (userId, thunkAPI) => {
     try {
       return await userService.adminDeleteUserById(userId);
@@ -129,7 +129,9 @@ export const userSlice = createSlice({
       .addCase(adminDeleteUserById.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = userType.ADMIN_DELETE_USER;
-        // state.user = action.payload;
+        state.users = state.users.filter(
+          (user) => user.user_id !== action.payload.userId
+        );
       })
       .addCase(adminDeleteUserById.rejected, (state, action) => {
         state.isLoading = false;
