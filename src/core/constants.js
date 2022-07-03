@@ -17,6 +17,6 @@ export const FORM_TYPE = {
 };
 
 export const ROLE = {
-  ROLE_ADMIN: 1,
-  ROLE_USER: 2,
+  ROLE_ADMIN: 'ROLE_ADMIN',
+  ROLE_USER: 'ROLE_USER',
 };

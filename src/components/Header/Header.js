@@ -20,6 +20,7 @@ import {
 import userPhoto from '../../images/Group 2.png';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout, reset } from '../../stores/auth/authSlice';
+import { ROLE } from '../../core/constants';
 
 const Header = () => {
   const history = useHistory();
@@ -55,28 +56,36 @@ const Header = () => {
             </Link>
           </li>
 
-          {loginedUser?.id_user && (
-            <>
+          {loginedUser?.id_user &&
+            loginedUser?.roles[0].role === ROLE.ROLE_USER && (
+              <>
+                <li className="nav-item active">
+                  <Link to="/newrecipe" className="nav-link">
+                    <FontAwesomeIcon icon={faPlus} />
+                    <span className="badge bg-light text-dark">New Recipe</span>
+                  </Link>
+                </li>
+                <li className="nav-item active">
+                  <Link to="/ownrecipes" className="nav-link">
+                    <FontAwesomeIcon icon={faReceipt} />
+                    <span className="badge bg-light text-dark">
+                      Own Recipes
+                    </span>
+                  </Link>
+                </li>
+              </>
+            )}
+          {loginedUser?.id_user &&
+            loginedUser?.roles[0]?.role === ROLE.ROLE_ADMIN && (
               <li className="nav-item active">
-                <Link to="/newrecipe" className="nav-link">
-                  <FontAwesomeIcon icon={faPlus} />
-                  <span className="badge bg-light text-dark">New Recipe</span>
+                <Link to="/listmembers" className="nav-link">
+                  <FontAwesomeIcon icon={faPeopleGroup} />
+                  <span className="badge bg-light text-dark">
+                    Manage Members
+                  </span>
                 </Link>
               </li>
-              <li className="nav-item active">
-                <Link to="/ownrecipes" className="nav-link">
-                  <FontAwesomeIcon icon={faReceipt} />
-                  <span className="badge bg-light text-dark">Own Recipes</span>
-                </Link>
-              </li>
-            </>
-          )}
-          {/* <li className="nav-item active">
-            <Link to="/listmembers" className="nav-link">
-              <FontAwesomeIcon icon={faPeopleGroup} />
-              <span className="badge bg-light text-dark">Manage Members</span>
-            </Link>
-          </li> */}
+            )}
         </ul>
         <ul className="navbar-nav align-items-center">
           <li className="nav-item">
