@@ -1,60 +1,85 @@
 /** @format */
 
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useHistory, useParams } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 
 import {
-	faEdit,
-	faPen,
-	faTrainSubway,
-	faTrash,
-} from "@fortawesome/free-solid-svg-icons";
+  faEdit,
+  faPen,
+  faTrainSubway,
+  faTrash,
+} from '@fortawesome/free-solid-svg-icons';
 
-import "./ListMembers.css";
+import './ListMembers.css';
+import { adminGetUserById } from '../../stores/users/userSlice';
+import LoadingSpinner from '../LoadingSpinner';
 
 const DetailMember = () => {
-	return (
-		<section className='view-info p-5'>
-			<div className='container'>
-				<div className='row align-items-center'>
-					<div className='col-md-4'>
-						<img
-							src='https://cdn3.iconfinder.com/data/icons/avatars-9/145/Avatar_Dog-512.png'
-							className='contact-img'></img>
-					</div>
-					<div className='col-md-8'>
-						<ul className='list-group'>
-							<li className='list-group-item list-group-item-action'>
-								Username:<span className='fw-bold'> _13mar </span>
-							</li>
-							<li className='list-group-item list-group-item-action'>
-								Name:<span className='fw-bold'> Quỳnh Hoàng </span>
-							</li>
-							<li className='list-group-item list-group-item-action'>
-								Email:
-								<span className='fw-bold'> khanhquynh133@gmail.com </span>
-							</li>
-							<li className='list-group-item list-group-item-action'>
-								Gender:<span className='fw-bold'> Female </span>
-							</li>
-							<li className='list-group-item list-group-item-action'>
-								Phone:<span className='fw-bold'> 0935001303 </span>
-							</li>
-							<li className='list-group-item list-group-item-action'>
-								YOB:<span className='fw-bold'> 2000 </span>
-							</li>
-						</ul>
-					</div>
-				</div>
-				<div className='d-flex justify-content-end my-2'>
-					<Link to={"/listmembers"} className='btn btn-warning'>
-						Back
-					</Link>
-				</div>
-			</div>
-		</section>
-	);
+  const history = useHistory();
+  const dispatch = useDispatch();
+  const { id } = useParams();
+  const { user, isLoading } = useSelector((state) => state.users);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    dispatch(adminGetUserById(id));
+  }, [id, dispatch]);
+
+  if (isLoading) {
+    return <LoadingSpinner />;
+  }
+  console.log(user);
+
+  return (
+    <section className="view-info p-5">
+      <div className="container">
+        <div className="row align-items-center">
+          <div className="col-md-4">
+            <img
+              src={
+                user?.urlImage
+                  ? user?.urlImage
+                  : 'https://cdn3.iconfinder.com/data/icons/avatars-9/145/Avatar_Dog-512.png'
+              }
+              className="contact-img"
+              alt="profile"
+            />
+          </div>
+          <div className="col-md-8">
+            <ul className="list-group">
+              <li className="list-group-item list-group-item-action">
+                Username:<span className="fw-bold"> {user?.username} </span>
+              </li>
+              <li className="list-group-item list-group-item-action">
+                Name:<span className="fw-bold"> {user?.name} </span>
+              </li>
+              <li className="list-group-item list-group-item-action">
+                Email:
+                <span className="fw-bold"> {user?.email} </span>
+              </li>
+              <li className="list-group-item list-group-item-action">
+                Gender:<span className="fw-bold"> {user?.gender} </span>
+              </li>
+              <li className="list-group-item list-group-item-action">
+                Phone:<span className="fw-bold"> {user?.phone} </span>
+              </li>
+              <li className="list-group-item list-group-item-action">
+                YOB:<span className="fw-bold"> {user?.yob} </span>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div className="d-flex justify-content-end my-2">
+          <Link to={'/listmembers'} className="btn btn-warning">
+            Back
+          </Link>
+        </div>
+      </div>
+    </section>
+  );
 };
 
 export default DetailMember;

@@ -57,12 +57,12 @@ function App() {
         <ListMembers />
         <Footer />
       </Route>
-      <Route path="/detailmember">
+      <Route path="/detailmember/:id">
         <Header />
         <DetailMember />
         <Footer />
       </Route>
-      <Route path="/editmember">
+      <Route path="/editmember/:id">
         <Header />
         <EditMember />
         <Footer />
