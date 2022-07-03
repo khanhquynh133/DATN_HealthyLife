@@ -4,6 +4,7 @@ export const ENDPOINT = {
   TYPES: 'types',
   AUTH: 'auth',
   RECIPES: 'recipes',
+  USERS: 'users',
 };
 export const TYPE = {
   AIRFRYER: 1,
