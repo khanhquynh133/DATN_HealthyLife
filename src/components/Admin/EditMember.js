@@ -1,96 +1,172 @@
 /** @format */
 
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { faEye, faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faEye, faPen, faTrash } from '@fortawesome/free-solid-svg-icons';
 
-import "./ListMembers.css";
+import './ListMembers.css';
+import LoadingSpinner from '../LoadingSpinner';
+import { useHistory, useParams } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import {
+  adminGetUserById,
+  adminUpdateUser,
+} from '../../stores/users/userSlice';
+import { userType } from '../../stores/users/userType';
+import { useForm } from 'react-hook-form';
 
 const EditMember = () => {
-	return (
-		// <section className='edit-info p-5'>
-		// 	<div className='container'>
+  const history = useHistory();
+  const dispatch = useDispatch();
+  const { id } = useParams();
+  const { user, isLoading, isSuccess } = useSelector((state) => state.users);
+  const { register, handleSubmit } = useForm({
+    defaultValues: {
+      username: 'khanhquynh',
+      email: 'khanhquynh@gmail.com',
+      urlImage: 'no',
+      name: 'quynh',
+      gender: 'female',
+      phone: '',
+      yob: '2000',
+    },
+  });
 
-		// 		<div className='row '>
-		// 			<div className='col-md-4'>
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    dispatch(adminGetUserById(id));
+  }, [id, dispatch]);
 
-		// 			</div>
-		// 		</div>
-		// 	</div>
-		// </section>
-		<section className='edit-info p-5'>
-			<div className='container'>
-				<div className='row align-items-center justify-content-center'>
-					<div className='col-md-4'>
-						<img
-							src='https://cdn3.iconfinder.com/data/icons/avatars-9/145/Avatar_Dog-512.png'
-							className='contact-img'></img>
-					</div>
-					<div className='col-md-5'>
-						<form>
-							<div className='mb-2'>
-								<input
-									type='text'
-									className='form-control'
-									placeholder='PhotoURL'
-								/>
-							</div>
+  useEffect(() => {
+    if (isSuccess === userType.ADMIN_UDPATE_USER) {
+      history.push(`detailmember/${id}`);
+    }
+  }, [isSuccess, id, history]);
 
-							<div className='mb-2'>
-								<input
-									type='text'
-									className='form-control'
-									placeholder='Name'
-								/>
-							</div>
-							<div className='mb-2'>
-								<input
-									type='text'
-									className='form-control'
-									placeholder='UserName'
-								/>
-							</div>
-							<div className='mb-2'>
-								<input
-									type='email'
-									className='form-control'
-									placeholder='Email'
-								/>
-							</div>
-							<div className='mb-2'>
-								<input
-									type='text'
-									className='form-control'
-									placeholder='Gender'
-								/>
-							</div>
-							<div className='mb-2'>
-								<input
-									type='text'
-									className='form-control'
-									placeholder='Phone'
-								/>
-							</div>
-							<div className='mb-2'>
-								<input type='text' className='form-control' placeholder='YOB' />
-							</div>
-							<div className='mb-2'>
-								<input
-									type='submit'
-									className='btn btn-primary me-md-2'
-									value='Update'></input>
-								<Link to={"/listmembers"} className='btn btn-warning'>
-									Back
-								</Link>
-							</div>
-						</form>
-					</div>
-				</div>
-			</div>
-		</section>
-	);
+  const submitForm = (data) => {
+    console.log({ data });
+    // dispatch(adminUpdateUser(data));
+  };
+
+  if (isLoading) {
+    return <LoadingSpinner />;
+  }
+
+  return (
+    <section className="edit-info p-5">
+      <div className="container">
+        <div className="row align-items-center justify-content-center">
+          <div className="col-md-4">
+            <img
+              src={
+                user?.urlImage
+                  ? user?.urlImage
+                  : 'https://cdn3.iconfinder.com/data/icons/avatars-9/145/Avatar_Dog-512.png'
+              }
+              className="contact-img"
+              alt="profile"
+            />
+          </div>
+          <div className="col-md-5">
+            <form className="row mb-5 my-2" onSubmit={handleSubmit(submitForm)}>
+              <div className="mb-2">
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="UserName"
+                  {...register('username')}
+                  disabled
+                />
+              </div>
+              <div className="mb-2">
+                <input
+                  type="email"
+                  className="form-control"
+                  placeholder="Email"
+                  {...register('email')}
+                  disabled
+                />
+              </div>
+              <div className="mb-2">
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="imageUrl"
+                  {...register('photo')}
+                />
+              </div>
+
+              <div className="mb-2">
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="Name"
+                  {...register('name')}
+                />
+              </div>
+              <div className="mb-2">
+                <label>Gender: </label>
+                <div className="form-check">
+                  <label htmlFor="female">
+                    <input
+                      {...register('gender', { required: true })}
+                      type="radio"
+                      name="gender"
+                      value="female"
+                      className="form-check-input"
+                      id="female"
+                    />
+                    Female
+                  </label>
+                </div>
+                <div className="form-check">
+                  <label htmlFor="male">
+                    <input
+                      {...register('gender', { required: true })}
+                      type="radio"
+                      name="gender"
+                      value="male"
+                      className="form-check-input"
+                      id="male"
+                    />
+                    Male
+                  </label>
+                </div>
+              </div>
+              <div className="mb-2">
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="Phone"
+                  {...register('phone')}
+                />
+              </div>
+              <div className="mb-2">
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="YOB"
+                  {...register('yob')}
+                />
+              </div>
+              <div className="mb-2">
+                <input
+                  type="submit"
+                  className="btn btn-primary me-md-2"
+                  value="Update"
+                ></input>
+                <Link to={'/listmembers'} className="btn btn-warning">
+                  Back
+                </Link>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
 };
 
 export default EditMember;
