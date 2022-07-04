@@ -8,6 +8,7 @@ import { faEdit } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch, useSelector } from 'react-redux';
 import authStorageService from '../../core/authStorage.service';
 import { getUserInfo } from '../../stores/auth/authSlice';
+import { ROLE } from '../../core/constants';
 const Profile = () => {
   const { loginedUser } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
@@ -46,10 +47,11 @@ const Profile = () => {
                     />
 
                     <h5>{loginedUser?.name}</h5>
-
-                    <Link to={'editprofile/' + loginedUser?.user_id}>
-                      <FontAwesomeIcon icon={faEdit} />
-                    </Link>
+                    {loginedUser?.roles[0].role !== ROLE.ROLE_ADMIN && (
+                      <Link to={'editprofile/' + loginedUser?.user_id}>
+                        <FontAwesomeIcon icon={faEdit} />
+                      </Link>
+                    )}
                   </div>
                   <div className="col-md-8">
                     <div className="card-body p-4">
