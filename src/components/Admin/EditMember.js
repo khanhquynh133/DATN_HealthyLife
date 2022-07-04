@@ -159,6 +159,7 @@ const EditMember = () => {
                     type="submit"
                     className="btn btn-primary me-md-2"
                     value="Update"
+                    disabled={isLoading}
                   ></input>
                   <Link to={'/listmembers'} className="btn btn-warning">
                     Back

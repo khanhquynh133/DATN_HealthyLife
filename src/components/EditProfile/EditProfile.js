@@ -13,7 +13,9 @@ import { authType } from '../../stores/auth/authType';
 import { useForm } from 'react-hook-form';
 
 const EditProfile = () => {
-  const { loginedUser, isSuccess } = useSelector((state) => state.auth);
+  const { loginedUser, isSuccess, isLoading } = useSelector(
+    (state) => state.auth
+  );
   const dispatch = useDispatch();
   const token = authStorageService().getToken();
   const history = useHistory();
@@ -159,6 +161,7 @@ const EditProfile = () => {
                       <div className="mb-2">
                         <input
                           type="submit"
+                          disabled={isLoading}
                           className="btn btn-primary me-md-2"
                           value="Save"
                         ></input>
