@@ -10,7 +10,7 @@ import { getRecipeById } from '../../stores/recipe/recipesSlice';
 import { Link } from 'react-router-dom';
 import FormFood from '../FormFood/FormFood';
 import RecipeForm from '../RecipeForm';
-import { FORM_TYPE } from '../../core/constants';
+import { FORM_TYPE, ROLE } from '../../core/constants';
 const EditFood = () => {
   let history = useHistory();
   const dispatch = useDispatch();
@@ -32,14 +32,16 @@ const EditFood = () => {
 				<FormFood food={food} key={food.id_recipe} />
 			))}
 			<FormFood></FormFood> */}
-      {editRecipe && editRecipe?.creator?.id_user === loginedUser?.id_user && (
-        <>
-          <h2 className="recipe-name my-3">
-            <b>EDIT RECIPE</b>
-          </h2>
-          <RecipeForm recipe={editRecipe} formType={FORM_TYPE.UPDATE} />
-        </>
-      )}
+      {editRecipe &&
+        (editRecipe?.creator?.id_user === loginedUser?.id_user ||
+          loginedUser?.roles[0].role === ROLE.ROLE_ADMIN) && (
+          <>
+            <h2 className="recipe-name my-3">
+              <b>EDIT RECIPE</b>
+            </h2>
+            <RecipeForm recipe={editRecipe} formType={FORM_TYPE.UPDATE} />
+          </>
+        )}
     </div>
   );
 };
