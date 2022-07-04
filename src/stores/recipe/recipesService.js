@@ -43,8 +43,8 @@ const updateRecipe = async (data) => {
 
 // Delete recipe
 const deleteRecipe = async (recipeId) => {
-  const response = await api(true).delete(`${endpoint}/${recipeId}`);
-  return response.data;
+  await api(true).delete(`${endpoint}/${recipeId}`);
+  return recipeId;
 };
 
 const recipesService = {

@@ -206,7 +206,6 @@ export const questionSlice = createSlice({
         state.isLoading = false;
         state.isError = recipesType.UPDATE_RECIPE;
         state.message = action.payload;
-        console.log('error', action.payload);
       })
       .addCase(deleteRecipe.pending, (state) => {
         state.isLoading = true;
@@ -214,6 +213,10 @@ export const questionSlice = createSlice({
       .addCase(deleteRecipe.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = recipesType.DELETE_RECIPE;
+        console.log(action.payload);
+        state.ownRecipes = state.ownRecipes.filter(
+          (recipe) => recipe.id_recipe !== +action.payload
+        );
       })
       .addCase(deleteRecipe.rejected, (state, action) => {
         state.isLoading = false;

@@ -9,6 +9,7 @@ import './FoodDetails.css';
 import { deleteRecipe, getRecipeById } from '../../stores/recipe/recipesSlice';
 import { Link } from 'react-router-dom';
 import LoadingSpinner from '../LoadingSpinner';
+import { ROLE } from '../../core/constants';
 
 const FoodDetails = () => {
   let history = useHistory();
@@ -27,7 +28,11 @@ const FoodDetails = () => {
 
   const handleDelete = () => {
     dispatch(deleteRecipe(id));
-    history.push('/');
+    if (loginedUser?.roles[0].role === ROLE.ROLE_ADMIN) {
+      history.push('/explore');
+    } else {
+      history.push('/ownrecipes');
+    }
   };
 
   if (isLoading) {

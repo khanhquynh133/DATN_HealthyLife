@@ -69,7 +69,11 @@ const RecipeForm = (props) => {
     if (isSuccess === recipesType.CREATE_RECIPE) {
       history.push(`food/${addRecipe.id_recipe}`);
     }
-  }, [isSuccess, addRecipe, history]);
+
+    if (isSuccess === recipesType.UPDATE_RECIPE) {
+      history.push(`/food/${defaultValues.id_recipe}`);
+    }
+  }, [isSuccess, addRecipe, history, defaultValues]);
 
   return (
     <div className="recipe-form container scrollable">
