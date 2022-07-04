@@ -16,7 +16,7 @@ export const adminGetUserById = createAsyncThunk(
   `user/${userType.ADMIN_GET_USER_BY_ID}`,
   async (userId, thunkAPI) => {
     try {
-      return await userService.getUserById(userId);
+      return await userService.adminGetUserById(userId);
     } catch (error) {
       const errorCode = error?.response?.status;
       const message = error?.response?.data?.message;
@@ -57,11 +57,11 @@ export const adminUpdateUser = createAsyncThunk(
 );
 
 // Delete user by id
-export const adminDeleteUserById = createAsyncThunk(
+export const adminDeleteUser = createAsyncThunk(
   `user/${userType.ADMIN_DELETE_USER}`,
   async (userId, thunkAPI) => {
     try {
-      return await userService.adminDeleteUserById(userId);
+      return await userService.adminDeleteUser(userId);
     } catch (error) {
       const errorCode = error?.response?.status;
       const message = error?.response?.data?.message;
@@ -121,19 +121,20 @@ export const userSlice = createSlice({
       .addCase(adminUpdateUser.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = userType.ADMIN_UDPATE_USER;
+        console.log('error', action.payload);
         state.message = action.payload;
       })
-      .addCase(adminDeleteUserById.pending, (state) => {
+      .addCase(adminDeleteUser.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(adminDeleteUserById.fulfilled, (state, action) => {
+      .addCase(adminDeleteUser.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = userType.ADMIN_DELETE_USER;
         state.users = state.users.filter(
-          (user) => user.user_id !== action.payload.userId
+          (user) => user.id_user !== action.payload
         );
       })
-      .addCase(adminDeleteUserById.rejected, (state, action) => {
+      .addCase(adminDeleteUser.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = userType.ADMIN_DELETE_USER;
         state.message = action.payload;

@@ -18,6 +18,7 @@ const apiService = (sendToken = false) => {
     get: (url) => axios.get(url, options),
     post: (url, data) => axios.post(url, data, options),
     put: (url, data) => axios.put(url, data, options),
+    patch: (url, data) => axios.patch(url, data, options),
     delete: (url) => axios.delete(url, options),
   };
 };

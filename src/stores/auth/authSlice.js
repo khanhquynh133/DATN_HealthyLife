@@ -137,11 +137,13 @@ export const authSlice = createSlice({
       .addCase(updateUser.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = authType.UPDATE_USER;
-        state.loginedUser = action.payload;
+        console.log(action.payload);
+        // state.loginedUser = action.payload;
       })
       .addCase(updateUser.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = authType.UPDATE_USER;
+        console.log('err', action.payload);
         state.message = action.payload;
       });
   },

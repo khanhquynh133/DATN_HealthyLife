@@ -17,14 +17,26 @@ const adminGetAllUsers = async () => {
 
 // Update user
 const adminUpdateUser = async (userData) => {
-  const response = await api(true).get(`${endpoint}/${userData.id_user}`);
+  const { name, gender, phone, yob, urlImage } = userData;
+  console.log({ name, gender, phone, yob: +yob, urlImage });
+  const response = await api(true).patch(
+    `${endpoint}/${userData.id_user.toString()}`,
+    {
+      name,
+      gender,
+      phone,
+      yob: +yob,
+      urlImage,
+    }
+  );
+  console.log('run');
   return response.data;
 };
 
 // Delete user
-const adminDeleteUser = async (userData) => {
-  const response = await api(true).get(`${endpoint}/${userData.id_user}`);
-  return response.data;
+const adminDeleteUser = async (userId) => {
+  await api(true).delete(`${endpoint}/${userId}`);
+  return userId;
 };
 
 const userService = {

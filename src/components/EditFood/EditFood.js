@@ -32,7 +32,7 @@ const EditFood = () => {
 				<FormFood food={food} key={food.id_recipe} />
 			))}
 			<FormFood></FormFood> */}
-      {editRecipe && editRecipe?.creator?.userId === loginedUser?.id_user && (
+      {editRecipe && editRecipe?.creator?.id_user === loginedUser?.id_user && (
         <>
           <h2 className="recipe-name my-3">
             <b>EDIT RECIPE</b>
