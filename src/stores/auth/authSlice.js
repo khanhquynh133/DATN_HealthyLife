@@ -112,7 +112,7 @@ export const authSlice = createSlice({
       .addCase(login.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = authType.LOGIN;
-        state.message = action.payload;
+        state.message = 'Invalid email or password';
         state.user = null;
       })
       .addCase(logout.fulfilled, (state) => {
@@ -137,13 +137,11 @@ export const authSlice = createSlice({
       .addCase(updateUser.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = authType.UPDATE_USER;
-        console.log(action.payload);
-        // state.loginedUser = action.payload;
+        state.loginedUser = action.payload;
       })
       .addCase(updateUser.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = authType.UPDATE_USER;
-        console.log('err', action.payload);
         state.message = action.payload;
       });
   },

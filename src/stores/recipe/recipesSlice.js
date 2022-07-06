@@ -147,7 +147,7 @@ export const questionSlice = createSlice({
       .addCase(getRecipesByTypeId.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = recipesType.GET_RECIPES_BY_TYPE;
-        state.recipes = action.payload;
+        state.recipes = action.payload.reverse();
       })
       .addCase(getRecipesByTypeId.rejected, (state, action) => {
         state.isLoading = false;
@@ -174,7 +174,7 @@ export const questionSlice = createSlice({
       .addCase(getRecipesByUserId.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = recipesType.GET_RECIPES_BY_USER_ID;
-        state.ownRecipes = action.payload;
+        state.ownRecipes = action.payload.reverse();
       })
       .addCase(getRecipesByUserId.rejected, (state, action) => {
         state.isLoading = false;
@@ -186,12 +186,12 @@ export const questionSlice = createSlice({
       })
       .addCase(searchRecipesByName.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.isSuccess = recipesType.GET_RECIPES_BY_USER_ID;
-        state.searchRecipe = action.payload;
+        state.isSuccess = recipesType.SEARCH_RECIPES_BY_NAME;
+        state.searchRecipe = action.payload.reverse();
       })
       .addCase(searchRecipesByName.rejected, (state, action) => {
         state.isLoading = false;
-        state.isError = recipesType.GET_RECIPES_BY_USER_ID;
+        state.isError = recipesType.SEARCH_RECIPES_BY_NAME;
         state.message = action.payload;
       })
       .addCase(updateRecipe.pending, (state) => {
@@ -213,10 +213,11 @@ export const questionSlice = createSlice({
       .addCase(deleteRecipe.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = recipesType.DELETE_RECIPE;
-        console.log(action.payload);
-        state.ownRecipes = state.ownRecipes.filter(
-          (recipe) => recipe.id_recipe !== +action.payload
-        );
+        // console.log(action.payload);
+        const newRecipes = state.ownRecipes
+          .filter((recipe) => recipe.recipe.id_recipe !== +action.payload)
+          .reverse();
+        state.ownRecipes = newRecipes;
       })
       .addCase(deleteRecipe.rejected, (state, action) => {
         state.isLoading = false;

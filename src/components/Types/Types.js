@@ -14,6 +14,7 @@ const Types = () => {
   const [type, setType] = useState(TYPE.AIRFRYER);
   const dispatch = useDispatch();
   const { recipes } = useSelector((state) => state.recipes);
+  console.log(recipes);
   const renderHeading = () => {
     switch (type) {
       case TYPE.AIRFRYER:

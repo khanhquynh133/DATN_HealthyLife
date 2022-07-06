@@ -193,6 +193,7 @@ const RecipeForm = (props) => {
 					</button>
 				</div>
 				{/* <div className='form-label '>	<select {...register("typeName")}>
+=
 						<option value='AirFryer'>AirFryer</option>
 						<option value='Juice'>Juice</option>
 						<option value='NutMilk'>NutMilk</option>
