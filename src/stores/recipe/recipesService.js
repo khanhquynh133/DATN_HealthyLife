@@ -13,7 +13,7 @@ const createRecipe = async (recipeData) => {
 
 // Get question by id
 const searchRecipesByName = async (queryString) => {
-  const response = await api().get(`${endpoint}?name=${queryString}`);
+  const response = await api().get(`${endpoint}${queryString}`);
   return response.data;
 };
 

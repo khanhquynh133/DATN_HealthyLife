@@ -11,14 +11,15 @@ const SearchResult = () => {
   const location = useLocation();
   const { search } = location;
   const name = search.substring(6);
+  console.log(search);
 
   const { searchRecipe } = useSelector((state) => state.recipes);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(searchRecipesByName(name));
-  }, [name, dispatch]);
+    dispatch(searchRecipesByName(search));
+  }, [search, dispatch]);
 
   return (
     <section className="food-area my-5">
