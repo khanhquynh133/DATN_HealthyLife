@@ -27,7 +27,10 @@ const Banner = () => {
 						</button>
 					</Link>
 				</div>
-
+				<select className=' my-4 d-flex mx-auto name-style'>
+					<option value='byName'>Search by Name</option>
+					<option value='byIngredient'>Search by Ingredient</option>
+				</select>
 				<h1 className='slogan text-warning'>Choose clean recipes </h1>
 				<h1 className='slogan text-warning'>
 					to make your life more healthier

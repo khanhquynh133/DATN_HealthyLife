@@ -12,6 +12,7 @@ import {
 	faHome,
 	faReceipt,
 	faPeopleGroup,
+	faHeart,
 } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch, useSelector } from "react-redux";
 import { logout, reset } from "../../stores/auth/authSlice";
@@ -67,6 +68,14 @@ const Header = () => {
 										</span>
 									</Link>
 								</li>
+								<li className='nav-item active'>
+									<Link to='/favoriterecipes' className='nav-link'>
+										<FontAwesomeIcon icon={faHeart} />
+										<span className='badge bg-light text-dark'>
+											Favorite Recipes
+										</span>
+									</Link>
+								</li>
 							</>
 						)}
 					{loginedUser?.id_user &&
@@ -93,7 +102,6 @@ const Header = () => {
 											? loginedUser.urlImage
 											: "https://www.sunsetlearning.com/wp-content/uploads/2019/09/User-Icon-Grey-300x300.png"
 									}
-									//src='https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp'
 									width='35px'
 									alt=''
 								/>
