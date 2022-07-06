@@ -21,7 +21,9 @@ const SignIn = () => {
   const [validate, setValidate] = useState({});
   const history = useHistory();
   const dispatch = useDispatch();
-  const { loginedUser, isLoading } = useSelector((state) => state.auth);
+  const { loginedUser, isLoading, message } = useSelector(
+    (state) => state.auth
+  );
   const token = authStorageService().getToken();
   useEffect(() => {
     if (loginedUser || token) {
@@ -71,10 +73,6 @@ const SignIn = () => {
     const user = { email, password };
     dispatch(login(user));
   };
-
-  if (isLoading) {
-    return <LoadingSpinner />;
-  }
 
   return (
     <div className="sign-in">
@@ -144,10 +142,15 @@ const SignIn = () => {
             </div>
           </div>
           <div className="form-group text-center">
-            <button className="btn btn-warning fw-bolder" type="submit">
+            <button
+              className="btn btn-warning fw-bolder"
+              type="submit"
+              disabled={isLoading}
+            >
               Sign In
             </button>
           </div>
+          <span>{message}</span>
           <div className="option text-center my-2">
             <Link to="/signup" className="nav-link">
               <label>

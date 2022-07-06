@@ -189,10 +189,10 @@ const RecipeForm = (props) => {
             <span> Submit </span>
           </button>
 
-          <button className="btn btn-danger rounded-pill my-3" type="button">
+          {/* <button className="btn btn-danger rounded-pill my-3" type="button">
             <FontAwesomeIcon icon={faClose} />
             <span> Close </span>
-          </button>
+          </button> */}
         </div>
         {/* <div className='form-label '>	<select {...register("typeName")}>
 						<option value='AirFryer'>AirFryer</option>

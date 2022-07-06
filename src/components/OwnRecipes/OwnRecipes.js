@@ -21,6 +21,7 @@ const OwnRecipes = () => {
   if (isLoading) {
     return <LoadingSpinner />;
   }
+  console.log(ownRecipes);
 
   return (
     <section className="food-area my-4">

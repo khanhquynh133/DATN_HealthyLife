@@ -174,7 +174,7 @@ export const questionSlice = createSlice({
       .addCase(getRecipesByUserId.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = recipesType.GET_RECIPES_BY_USER_ID;
-        state.recipes = action.payload.reverse();
+        state.ownRecipes = action.payload.reverse();
       })
       .addCase(getRecipesByUserId.rejected, (state, action) => {
         state.isLoading = false;
@@ -187,7 +187,7 @@ export const questionSlice = createSlice({
       .addCase(searchRecipesByName.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = recipesType.SEARCH_RECIPES_BY_NAME;
-        state.recipes = action.payload.reverse();
+        state.searchRecipe = action.payload.reverse();
       })
       .addCase(searchRecipesByName.rejected, (state, action) => {
         state.isLoading = false;
@@ -213,10 +213,11 @@ export const questionSlice = createSlice({
       .addCase(deleteRecipe.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = recipesType.DELETE_RECIPE;
-        console.log(action.payload);
-        state.ownRecipes = state.ownRecipes.filter(
-          (recipe) => recipe.id_recipe !== +action.payload
-        );
+        // console.log(action.payload);
+        const newRecipes = state.ownRecipes
+          .filter((recipe) => recipe.recipe.id_recipe !== +action.payload)
+          .reverse();
+        state.ownRecipes = newRecipes;
       })
       .addCase(deleteRecipe.rejected, (state, action) => {
         state.isLoading = false;
