@@ -21,3 +21,7 @@ code {
 .page {
   margin-bottom: auto;
 }
+
+ul {
+  list-style: none;
+}
