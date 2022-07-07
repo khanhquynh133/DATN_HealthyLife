@@ -139,6 +139,11 @@ const SignIn = () => {
 								: ""}
 						</div>
 					</div>
+					<div className='text-center mb-2'>
+						<span className='textcolor '>
+							<b>{message}</b>
+						</span>
+					</div>
 					<div className='form-group text-center'>
 						<button
 							className='btn btn-warning fw-bolder'
@@ -147,7 +152,7 @@ const SignIn = () => {
 							Sign In
 						</button>
 					</div>
-					<span>{message}</span>
+
 					<div className='option text-center my-2'>
 						<Link to='/signup' className='nav-link'>
 							<label>
