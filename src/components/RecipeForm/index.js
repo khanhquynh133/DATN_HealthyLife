@@ -101,6 +101,11 @@ const RecipeForm = (props) => {
             <input className="col-md-1 " {...register('time')} />
           </div>
           <h5 className="recipe-name ">📜 Ingredients</h5>
+          <ul className="d-flex">
+            <li className="amount-style">Amount</li>
+            <li className="unit-style ms-3">Unit</li>
+            <li className="ingredient-style ms-2">Ingredient</li>
+          </ul>
           <ul>
             {ingFileds.map((item, index) => {
               return (
