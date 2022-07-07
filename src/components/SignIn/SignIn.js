@@ -10,7 +10,7 @@ import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import Form from '../../utilities/Forms';
 import Validate from '../SignIn/ValidateSignInForm';
 import { useDispatch, useSelector } from 'react-redux';
-import { login, reset } from '../../stores/auth/authSlice';
+import { login, reset, resetMsg } from '../../stores/auth/authSlice';
 import LoadingSpinner from '../LoadingSpinner';
 import authStorageService from '../../core/authStorage.service';
 
@@ -21,7 +21,7 @@ const SignIn = () => {
   const [validate, setValidate] = useState({});
   const history = useHistory();
   const dispatch = useDispatch();
-  const { loginedUser, isLoading, message } = useSelector(
+  const { loginedUser, isLoading, message, isError } = useSelector(
     (state) => state.auth
   );
   const location = useLocation();
@@ -75,9 +75,9 @@ const SignIn = () => {
       dispatch(login(user));
     }
   };
-  useEffect(() => {
-    reset();
-  }, [pathname]);
+  // useEffect(() => {
+  //   dispatch(resetMsg());
+  // }, [pathname, dispatch]);
   if (isLoading) {
     return <LoadingSpinner />;
   }

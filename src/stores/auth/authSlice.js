@@ -1,6 +1,6 @@
 /** @format */
 
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk, createAction } from '@reduxjs/toolkit';
 import authStorageService from '../../core/authStorage.service';
 import { authType } from './authType';
 import authService from './authService';
@@ -60,6 +60,8 @@ export const getUserInfo = createAsyncThunk(
 export const logout = createAsyncThunk(`auth/${authType.LOGOUT}`, async () => {
   await authService.logout();
 });
+
+export const resetMsg = createAction(authType.CLEAR_MSG);
 
 // Update user
 export const updateUser = createAsyncThunk(
@@ -138,6 +140,9 @@ export const authSlice = createSlice({
         state.isLoading = false;
         state.isSuccess = authType.UPDATE_USER;
         state.loginedUser = action.payload;
+      })
+      .addCase(resetMsg, (state, action) => {
+        state.message = '';
       })
       .addCase(updateUser.rejected, (state, action) => {
         state.isLoading = false;

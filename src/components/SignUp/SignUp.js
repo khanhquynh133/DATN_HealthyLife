@@ -4,6 +4,9 @@ import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, Redirect, useHistory } from 'react-router-dom';
 import Logo from '../../images/carrotlogo.png';
+
+import { useLocation } from 'react-router-dom';
+import { login, reset, resetMsg } from '../../stores/auth/authSlice';
 import './SignUp.css';
 import Form from '../../utilities/Forms';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -21,6 +24,8 @@ const SignUp = () => {
   const dispatch = useDispatch();
   const { isSuccess } = useSelector((state) => state.auth);
   const history = useHistory();
+  const location = useLocation();
+  const { pathname } = location;
 
   const validateRegister = () => {
     let isValid = true;
@@ -77,6 +82,10 @@ const SignUp = () => {
       history.push('/signin');
     }
   }, [isSuccess, history]);
+
+  useEffect(() => {
+    dispatch(resetMsg());
+  }, [pathname, dispatch]);
 
   return (
     <div className="sign-up">
