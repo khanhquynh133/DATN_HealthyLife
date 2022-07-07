@@ -139,7 +139,7 @@ const RecipeForm = (props) => {
 									/>
 
 									<button
-										className='btn btn-danger rounded my-1'
+										className='btn btn-danger btn-sm rounded my-1'
 										type='button'
 										onClick={() => ingRemove(index)}>
 										<FontAwesomeIcon icon={faClose} />
@@ -210,11 +210,6 @@ const RecipeForm = (props) => {
 						type='submit'>
 						<FontAwesomeIcon icon={faSave} />
 						<span> Submit </span>
-					</button>
-
-					<button className='btn btn-danger rounded-pill my-3' type='button'>
-						<FontAwesomeIcon icon={faClose} />
-						<span> Close </span>
 					</button>
 				</div>
 				{/* <div className='form-label '>	<select {...register("typeName")}>
