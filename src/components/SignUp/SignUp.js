@@ -1,8 +1,8 @@
 /** @format */
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import { Link, Redirect } from 'react-router-dom';
+import { Link, Redirect, useHistory } from 'react-router-dom';
 import Logo from '../../images/carrotlogo.png';
 import './SignUp.css';
 import Form from '../../utilities/Forms';
@@ -10,6 +10,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { register } from '../../stores/auth/authSlice';
+import { authType } from '../../stores/auth/authType';
 
 const SignUp = () => {
   const [name, setName] = useState('');
@@ -18,6 +19,8 @@ const SignUp = () => {
   const [validate, setValidate] = useState({});
   const [showPassword, setShowPassword] = useState(false);
   const dispatch = useDispatch();
+  const { isSuccess } = useSelector((state) => state.auth);
+  const history = useHistory();
 
   const validateRegister = () => {
     let isValid = true;
@@ -68,6 +71,12 @@ const SignUp = () => {
       setShowPassword(true);
     }
   };
+
+  useEffect(() => {
+    if (isSuccess === authType.REGISTER) {
+      history.push('/signin');
+    }
+  }, [isSuccess, history]);
 
   return (
     <div className="sign-up">
