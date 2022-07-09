@@ -1,11 +1,5 @@
 /** @format */
 
-@import url("https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap");
-
-.type-name {
-	font-family: "Dancing Script", cursive;
-}
-
 .food-area nav li {
 	color: black;
 	cursor: pointer;
