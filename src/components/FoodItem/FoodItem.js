@@ -19,13 +19,19 @@ const FoodItem = (props) => {
 					<img src={image} alt='FoodItem' className='card-img-top' />
 
 					<div className='card-body'>
-						<h5 className='name-type'>{name}</h5>
 						<p>
-							<i>
-								By <b>{username}</b>
-							</i>
+							<h5 className='name-type  name-style'>{name}</h5>
 						</p>
-						<p>⏱ {time} minutes</p>
+						<p>
+							<h7 className='name-type  name-style'>
+								<i>
+									By <b>{username}</b>
+								</i>
+							</h7>
+						</p>
+						<p>
+							<h7 className='name-type  name-style'>⏱ {time} minutes</h7>
+						</p>
 					</div>
 				</div>
 			</div>

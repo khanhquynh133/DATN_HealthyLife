@@ -1,10 +1,5 @@
 /** @format */
 
-@import url("https://fonts.googleapis.com/css?family=Montserrat:400");
-
-.name-style {
-	font-family: "Montserrat", cursive;
-}
 .banner {
 	background-image: url("https://images.pexels.com/photos/326281/pexels-photo-326281.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2");
 	/* background-image: url("../../images/bannerbackground.jpg"); */
@@ -32,7 +27,6 @@
 	border-radius: 20px;
 	border: none;
 	padding-left: 20px;
-	color: #f1af00;
 }
 .slogan {
 	font-family: "Dancing Script", cursive;

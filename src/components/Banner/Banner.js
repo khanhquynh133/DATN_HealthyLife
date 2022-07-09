@@ -33,7 +33,7 @@ const Banner = () => {
 					<Link to={`/search?${searchBy}=${searchQuery}`}>
 						<button
 							onClick={() => window.scrollBy(0, 525)}
-							className='btn btn-warning search-btn rounded-pill'>
+							className='btn btn-warning search-btn rounded-pill name-style'>
 							<b>Search</b>
 						</button>
 					</Link>

@@ -2,9 +2,7 @@
 
 import React from "react";
 import { Link, useHistory } from "react-router-dom";
-import "./Header.css";
-import Logo from "../../images/carrotlogo.png";
-import Slogan from "../../images/slogan.png";
+import { useDispatch, useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
 	faUtensils,
@@ -14,7 +12,9 @@ import {
 	faPeopleGroup,
 	faHeart,
 } from "@fortawesome/free-solid-svg-icons";
-import { useDispatch, useSelector } from "react-redux";
+import "./Header.css";
+import Logo from "../../images/carrotlogo.png";
+import Slogan from "../../images/slogan.png";
 import { logout, reset } from "../../stores/auth/authSlice";
 import { ROLE } from "../../core/constants";
 
@@ -41,13 +41,15 @@ const Header = () => {
 					<li className='nav-item active'>
 						<Link to='/' className='nav-link'>
 							<FontAwesomeIcon icon={faHome} />
-							<span className='badge bg-light text-dark'>Home</span>
+							<span className='badge bg-light text-dark name-style'>Home</span>
 						</Link>
 					</li>
 					<li className='nav-item active'>
 						<Link to='/explore' className='nav-link'>
 							<FontAwesomeIcon icon={faUtensils} />
-							<span className='badge bg-light text-dark'>Explore</span>
+							<span className='badge bg-light text-dark name-style'>
+								Explore
+							</span>
 						</Link>
 					</li>
 
@@ -57,19 +59,23 @@ const Header = () => {
 								<li className='nav-item active'>
 									<Link to='/newrecipe' className='nav-link'>
 										<FontAwesomeIcon icon={faPlus} />
-										<span className='badge bg-light text-dark'>New Recipe</span>
+										<span className='badge bg-light text-dark name-style'>
+											New Recipe
+										</span>
 									</Link>
 								</li>
 								<li className='nav-item active'>
 									<Link to='/ownrecipes' className='nav-link'>
 										<FontAwesomeIcon icon={faReceipt} />
-										<span className='badge bg-light text-dark'>
+										<span className='badge bg-light text-dark name-style'>
 											Own Recipes
 										</span>
 									</Link>
 								</li>
 								<li className='nav-item active'>
-									<Link to='/favoriterecipes' className='nav-link'>
+									<Link
+										to='/favoriterecipes'
+										className='nav-link name-style name-style'>
 										<FontAwesomeIcon icon={faHeart} />
 										<span className='badge bg-light text-dark'>
 											Favorite Recipes
@@ -83,7 +89,7 @@ const Header = () => {
 							<li className='nav-item active'>
 								<Link to='/listmembers' className='nav-link'>
 									<FontAwesomeIcon icon={faPeopleGroup} />
-									<span className='badge bg-light text-dark'>
+									<span className='badge bg-light text-dark name-style'>
 										Manage Members
 									</span>
 								</Link>
@@ -93,8 +99,8 @@ const Header = () => {
 				<ul className='navbar-nav align-items-center'>
 					<li className='nav-item'>
 						{loginedUser?.id_user && (
-							<Link to='/profile' className='nav-link me-md-2'>
-								{loginedUser?.username}{" "}
+							<Link to='/profile' className='nav-link me-md-2 name-style'>
+								<b>{loginedUser?.username} </b>{" "}
 								<img
 									className='ml-3 circle'
 									src={
@@ -112,7 +118,7 @@ const Header = () => {
 						{loginedUser?.id_user ? (
 							<>
 								<button
-									className='btn btn-warning rounded-pill '
+									className='btn btn-warning rounded-pill name-style'
 									onClick={handleLogout}>
 									Logout
 								</button>
@@ -120,18 +126,13 @@ const Header = () => {
 						) : (
 							<>
 								<Link to='/signin' className='nav-link'>
-									<button className='btn btn-warning rounded-pill '>
+									<button className='btn btn-warning rounded-pill name-style'>
 										Sign In
 									</button>
 								</Link>
 							</>
 						)}
 					</li>
-					{/* <li className='nav-item'>
-						<Link to='/signin' className='nav-link'>
-							<button className='btn btn-warning rounded-pill '>Sign In</button>
-						</Link>
-					</li> */}
 				</ul>
 			</div>
 		</nav>

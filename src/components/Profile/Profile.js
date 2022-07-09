@@ -44,7 +44,9 @@ const Profile = () => {
 											style={{ width: 100, height: 100, borderRadius: 50 }}
 										/>
 
-										<h6 className='name-style'>{loginedUser?.name}</h6>
+										<h6 className='name-style'>
+											<b>{loginedUser?.name}</b>
+										</h6>
 										{loginedUser?.roles[0].role !== ROLE.ROLE_ADMIN && (
 											<Link to={"editprofile/" + loginedUser?.user_id}>
 												<FontAwesomeIcon icon={faEdit} />
