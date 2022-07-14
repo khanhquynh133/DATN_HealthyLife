@@ -155,6 +155,30 @@ export const removeFavoriteRecipe = createAsyncThunk(
   }
 );
 
+export const publishRecipe = createAsyncThunk(
+  `fav/${recipesType.PUBLISH_RECIPE}`,
+  async (id, thunkAPI) => {
+    try {
+      return await recipesService.publishRecipe(id);
+    } catch (error) {
+      const message = error?.response?.data?.message;
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
+export const unpublishRecipe = createAsyncThunk(
+  `fav/${recipesType.UN_PUBLISH_RECIPE}`,
+  async (id, thunkAPI) => {
+    try {
+      return await recipesService.unpublishRecipe(id);
+    } catch (error) {
+      const message = error?.response?.data?.message;
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
 export const questionSlice = createSlice({
   name: 'question',
   initialState,
@@ -260,6 +284,32 @@ export const questionSlice = createSlice({
         state.isError = recipesType.UN_FAV_RECIPE;
         state.message = action.payload;
       })
+      .addCase(publishRecipe.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(publishRecipe.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = recipesType.UN_FAV_RECIPE;
+        state.detailRecipe.recipe.isPublic = true;
+      })
+      .addCase(publishRecipe.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = recipesType.UN_FAV_RECIPE;
+        state.message = action.payload;
+      })
+      .addCase(unpublishRecipe.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(unpublishRecipe.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = recipesType.UN_FAV_RECIPE;
+        state.detailRecipe.recipe.isPublic = false;
+      })
+      .addCase(unpublishRecipe.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = recipesType.UN_FAV_RECIPE;
+        state.message = action.payload;
+      })
       .addCase(searchRecipesByName.pending, (state) => {
         state.isLoading = true;
       })
@@ -292,7 +342,6 @@ export const questionSlice = createSlice({
       .addCase(deleteRecipe.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = recipesType.DELETE_RECIPE;
-        // console.log(action.payload);
         const newRecipes = state.ownRecipes
           .filter((recipe) => recipe.recipe.id_recipe !== +action.payload)
           .reverse();

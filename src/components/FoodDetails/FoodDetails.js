@@ -16,7 +16,9 @@ import {
   addFavoriteRecipe,
   deleteRecipe,
   getRecipeById,
+  publishRecipe,
   removeFavoriteRecipe,
+  unpublishRecipe,
 } from '../../stores/recipe/recipesSlice';
 import { Link } from 'react-router-dom';
 import LoadingSpinner from '../LoadingSpinner';
@@ -56,10 +58,10 @@ const FoodDetails = () => {
   };
 
   const handlePublic = () => {
-    if (detailRecipe?.public) {
-      dispatch(removeFavoriteRecipe({ id_recipe: +id }));
+    if (detailRecipe?.recipe.isPublic) {
+      dispatch(unpublishRecipe(+id));
     } else {
-      dispatch(addFavoriteRecipe({ id_recipe: +id }));
+      dispatch(publishRecipe(+id));
     }
   };
 
@@ -157,14 +159,16 @@ const FoodDetails = () => {
               <FontAwesomeIcon icon={faClose} />
               <span> Close </span>
             </button>
-            <label>
-              <Toggle
-                defaultChecked={detailRecipe?.public}
-                className="custom-classname"
-                onChange={handlePublic}
-              />
-              <span>Public</span>
-            </label>
+            {detailRecipe?.creator?.id_user === loginedUser?.id_user && (
+              <label>
+                <Toggle
+                  defaultChecked={detailRecipe?.recipe.isPublic}
+                  className="custom-classname"
+                  onChange={handlePublic}
+                />
+                <span>Public</span>
+              </label>
+            )}
           </div>
         </div>
       )}

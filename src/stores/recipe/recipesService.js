@@ -56,7 +56,6 @@ const getFavoriteRecipes = async () => {
 
 // Add favorite recipe
 const addFavoriteRecipe = async (data) => {
-  console.log(data);
   const response = await api(true).post(`${favEndpoint}/add`, data);
   return response.data;
 };
@@ -64,6 +63,18 @@ const addFavoriteRecipe = async (data) => {
 // Remove favorite recipe
 const removeFavoriteRecipe = async (data) => {
   const response = await api(true).put(`${favEndpoint}/remove`, data);
+  return response.data;
+};
+
+// Publish recipe
+const publishRecipe = async (id) => {
+  const response = await api(true).put(`${endpoint}/${id}/publish`);
+  return response.data;
+};
+
+// Unpublish recipe
+const unpublishRecipe = async (id) => {
+  const response = await api(true).put(`${endpoint}/${id}/hide`);
   return response.data;
 };
 
@@ -78,6 +89,8 @@ const recipesService = {
   getFavoriteRecipes,
   addFavoriteRecipe,
   removeFavoriteRecipe,
+  publishRecipe,
+  unpublishRecipe,
 };
 
 export default recipesService;
