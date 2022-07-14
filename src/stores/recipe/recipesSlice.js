@@ -147,7 +147,7 @@ export const removeFavoriteRecipe = createAsyncThunk(
   `fav/${recipesType.UN_FAV_RECIPE}`,
   async (data, thunkAPI) => {
     try {
-      return await recipesService.addFavoriteRecipe(data);
+      return await recipesService.removeFavoriteRecipe(data);
     } catch (error) {
       const message = error?.response?.data?.message;
       return thunkAPI.rejectWithValue(message);
