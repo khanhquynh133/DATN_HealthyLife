@@ -26,6 +26,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import authStorageService from './core/authStorage.service';
 import { getUserInfo } from './stores/auth/authSlice';
 import LoadingSpinner from './components/LoadingSpinner';
+import Favorite from './components/Favorite';
 
 function App() {
   const { loginedUser, isLoading } = useSelector((state) => state.auth);
@@ -112,6 +113,11 @@ function App() {
       <Route path="/newrecipe">
         <Header />
         <NewRecipt />
+        <Footer />
+      </Route>
+      <Route path="/favoriterecipes">
+        <Header />
+        <Favorite />
         <Footer />
       </Route>
     </Switch>

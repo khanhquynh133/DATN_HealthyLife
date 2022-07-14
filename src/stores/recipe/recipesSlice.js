@@ -12,6 +12,7 @@ const initialState = {
   addRecipe: [],
   updateRcp: [],
   searchRecipe: [],
+  favRecipes: [],
   isError: '',
   isSuccess: '',
   isLoading: false,
@@ -115,6 +116,45 @@ export const deleteRecipe = createAsyncThunk(
   }
 );
 
+// Get favorite recipes
+export const getFavoriteRecipes = createAsyncThunk(
+  `recipes/${recipesType.GET_FAVORITE_RECIPES}`,
+  async (_, thunkAPI) => {
+    try {
+      return await recipesService.getFavoriteRecipes();
+    } catch (error) {
+      const errorCode = error?.response?.status;
+      const message = error?.response?.data?.message;
+      const errorResponse = { errorCode, message };
+      return thunkAPI.rejectWithValue(errorResponse);
+    }
+  }
+);
+
+export const addFavoriteRecipe = createAsyncThunk(
+  `fav/${recipesType.FAV_RECIPE}`,
+  async (data, thunkAPI) => {
+    try {
+      return await recipesService.addFavoriteRecipe(data);
+    } catch (error) {
+      const message = error?.response?.data?.message;
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
+export const removeFavoriteRecipe = createAsyncThunk(
+  `fav/${recipesType.UN_FAV_RECIPE}`,
+  async (data, thunkAPI) => {
+    try {
+      return await recipesService.addFavoriteRecipe(data);
+    } catch (error) {
+      const message = error?.response?.data?.message;
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
 export const questionSlice = createSlice({
   name: 'question',
   initialState,
@@ -179,6 +219,45 @@ export const questionSlice = createSlice({
       .addCase(getRecipesByUserId.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = recipesType.GET_RECIPES_BY_USER_ID;
+        state.message = action.payload;
+      })
+      .addCase(getFavoriteRecipes.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getFavoriteRecipes.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = recipesType.GET_FAVORITE_RECIPES;
+        state.favRecipes = action.payload.reverse();
+      })
+      .addCase(getFavoriteRecipes.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = recipesType.GET_FAVORITE_RECIPES;
+        state.message = action.payload;
+      })
+      .addCase(addFavoriteRecipe.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(addFavoriteRecipe.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = recipesType.FAV_RECIPE;
+        state.detailRecipe.favorite = true;
+      })
+      .addCase(addFavoriteRecipe.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = recipesType.FAV_RECIPE;
+        state.message = action.payload;
+      })
+      .addCase(removeFavoriteRecipe.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(removeFavoriteRecipe.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = recipesType.UN_FAV_RECIPE;
+        state.detailRecipe.favorite = false;
+      })
+      .addCase(removeFavoriteRecipe.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = recipesType.UN_FAV_RECIPE;
         state.message = action.payload;
       })
       .addCase(searchRecipesByName.pending, (state) => {

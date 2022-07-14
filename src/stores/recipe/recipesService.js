@@ -4,6 +4,7 @@ import api from '../../core/api.service';
 import { ENDPOINT } from '../../core/constants';
 
 const endpoint = ENDPOINT.RECIPES;
+const favEndpoint = ENDPOINT.FAV;
 
 // Create new recipe
 const createRecipe = async (recipeData) => {
@@ -47,6 +48,25 @@ const deleteRecipe = async (recipeId) => {
   return recipeId;
 };
 
+// Get favorite recipes
+const getFavoriteRecipes = async () => {
+  const response = await api(true).get(`${favEndpoint}`);
+  return response.data;
+};
+
+// Add favorite recipe
+const addFavoriteRecipe = async (data) => {
+  console.log(data);
+  const response = await api(true).post(`${favEndpoint}/add`, data);
+  return response.data;
+};
+
+// Remove favorite recipe
+const removeFavoriteRecipe = async (data) => {
+  const response = await api(true).put(`${favEndpoint}/remove`, data);
+  return response.data;
+};
+
 const recipesService = {
   createRecipe,
   updateRecipe,
@@ -55,6 +75,9 @@ const recipesService = {
   getRecipeById,
   searchRecipesByName,
   deleteRecipe,
+  getFavoriteRecipes,
+  addFavoriteRecipe,
+  removeFavoriteRecipe,
 };
 
 export default recipesService;
