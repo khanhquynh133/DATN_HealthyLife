@@ -73,8 +73,8 @@ ul {
 }
 
 .react-toggle-track {
-  width: 50px;
-  height: 24px;
+  width: 64px;
+  height: 38px;
   padding: 0;
   border-radius: 30px;
   background-color: #4d4d4d;
@@ -104,7 +104,7 @@ ul {
   margin-top: auto;
   margin-bottom: auto;
   line-height: 0;
-  left: 8px;
+  left: 10px;
   opacity: 0;
   -webkit-transition: opacity 0.25s ease;
   -moz-transition: opacity 0.25s ease;
@@ -143,8 +143,8 @@ ul {
   position: absolute;
   top: 1px;
   left: 1px;
-  width: 22px;
-  height: 22px;
+  width: 36px;
+  height: 36px;
   border: 1px solid #4d4d4d;
   border-radius: 50%;
   background-color: #fafafa;

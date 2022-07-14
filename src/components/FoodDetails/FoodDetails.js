@@ -110,7 +110,7 @@ const FoodDetails = () => {
               alt="food"
             />
           </div>
-          <div>
+          <div className="action">
             {detailRecipe?.creator?.id_user === loginedUser?.id_user ||
             loginedUser?.roles[0]?.role === ROLE.ROLE_ADMIN ? (
               <>
@@ -160,7 +160,7 @@ const FoodDetails = () => {
               <span> Close </span>
             </button>
             {detailRecipe?.creator?.id_user === loginedUser?.id_user && (
-              <label>
+              <label className="public">
                 <Toggle
                   defaultChecked={detailRecipe?.recipe.isPublic}
                   className="custom-classname"
