@@ -61,28 +61,38 @@ const Profile = () => {
 											<hr className='mt-0 mb-4' />
 											<div className='row pt-1'>
 												<div className='col-6 mb-3'>
-													<h6>Username</h6>
+													<h6>
+														<b>Username</b>
+													</h6>
 													<p className='text-muted'>{loginedUser?.username}</p>
 												</div>
 
 												<div className='col-6 mb-3'>
-													<h6>Email</h6>
+													<h6>
+														<b>Email</b>
+													</h6>
 													<p className='text-muted'>{loginedUser?.email}</p>
 												</div>
 												{loginedUser?.roles[0].role === ROLE.ROLE_USER && (
 													<>
 														<div className='col-6 mb-3'>
-															<h6>Phone</h6>
+															<h6>
+																<b>Phone</b>
+															</h6>
 															<p className='text-muted'>{loginedUser?.phone}</p>
 														</div>
 														<div className='col-6 mb-3'>
-															<h6>Gender</h6>
+															<h6>
+																<b>Gender</b>
+															</h6>
 															<p className='text-muted'>
 																{loginedUser?.gender}
 															</p>
 														</div>
 														<div className='col-6 mb-3'>
-															<h6>YOB</h6>
+															<h6>
+																<b>YOB</b>
+															</h6>
 															<p className='text-muted'>{loginedUser?.yob}</p>
 														</div>
 													</>

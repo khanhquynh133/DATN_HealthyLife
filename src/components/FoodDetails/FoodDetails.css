@@ -1,65 +1,61 @@
 /** @format */
 
-@import url('https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap");
 
-.name-style {
-  font-family: 'Montserrat', cursive;
-}
 .recipe-name {
-  font-family: 'Dancing Script', cursive;
+	font-family: "Dancing Script", cursive;
 }
 .cart-controller {
-  border-radius: 30px;
-  border: 1px solid rgb(82, 74, 74);
+	border-radius: 30px;
+	border: 1px solid rgb(82, 74, 74);
 }
 
 .cart-controller .btn {
-  font-size: 20px;
-  line-height: 30px;
-  padding: 0 10px !important;
+	font-size: 20px;
+	line-height: 30px;
+	padding: 0 10px !important;
 }
 
 .moor-images {
-  padding: 10px;
-  transition: all 0.2s linear;
+	padding: 10px;
+	transition: all 0.2s linear;
 }
 
 .moor-images:hover {
-  transform: scale(1.2);
+	transform: scale(1.2);
 }
 
 .selected {
-  border-radius: 50%;
-  border: 1px solid lightgrey;
+	border-radius: 50%;
+	border: 1px solid lightgrey;
 }
 
 .success-mgs {
-  animation: show-hide 1.5s ease-in-out 1 forwards;
-  font-style: italic;
+	animation: show-hide 1.5s ease-in-out 1 forwards;
+	font-style: italic;
 }
 
 .public {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-left: 12px;
+	display: flex;
+	align-items: center;
+	gap: 10px;
 }
 
 .action {
-  display: flex;
+	display: flex;
 }
 
 @keyframes show-hide {
-  0% {
-    opacity: 0;
-  }
-  50% {
-    opacity: 1;
-  }
-  75% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
+	0% {
+		opacity: 0;
+	}
+	50% {
+		opacity: 1;
+	}
+	75% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+	}
 }

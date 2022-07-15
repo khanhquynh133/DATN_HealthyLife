@@ -33,7 +33,7 @@ const SearchResult = () => {
 					))}
 					{searchRecipe.length === 0 && (
 						<h1 className='col-12 display-5 text-center name-style'>
-							<b>No food found!</b>
+							<b>No recipe found!</b>
 						</h1>
 					)}
 				</div>

@@ -206,7 +206,9 @@ const SignUp = () => {
 
 					<div className='option text-center '>
 						<Link to='/signin' className='nav-link'>
-							<label>Already have an account</label>
+							<label>
+								Already have an account! <u>Sign in</u>
+							</label>
 						</Link>
 					</div>
 				</form>

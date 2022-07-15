@@ -10,7 +10,7 @@ const Footer = () => {
 	//const auth = useAuth();
 	//const uid = auth.user == undefined ? "sddfd" : auth.user.uid;
 	return (
-		<footer className='bg-color py-1'>
+		<footer className='bg-color py-1 name-style'>
 			<div className='container'>
 				{/* <div className='row footer-top py-2'>
 					<div className='col-md-6 mb-1'>
