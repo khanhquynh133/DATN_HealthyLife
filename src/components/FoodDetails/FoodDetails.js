@@ -31,9 +31,10 @@ const FoodDetails = () => {
 	const { id } = useParams();
 	const { detailRecipe, isLoading } = useSelector((state) => state.recipes);
 	const { loginedUser } = useSelector((state) => state.auth);
+	const isAuth = loginedUser ? true : false;
 	useEffect(() => {
 		window.scrollTo(0, 0);
-		dispatch(getRecipeById(id));
+		dispatch(getRecipeById({ id, isAuth }));
 	}, [id, dispatch]);
 
 	const handleDelete = () => {
