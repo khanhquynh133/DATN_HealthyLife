@@ -106,7 +106,7 @@ const SignUp = () => {
 							id='name'
 							name='name'
 							value={name}
-							placeholder='Name'
+							placeholder='Username'
 							onChange={(e) => setName(e.target.value)}
 						/>
 						<div

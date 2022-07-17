@@ -20,13 +20,11 @@ const FoodItem = (props) => {
 
 					<div className='card-body'>
 						<div>
-							<h5 className='name-type  name-style'>{name}</h5>
+							<h5 className='name-type fw-bold name-style'>{name}</h5>
 						</div>
 						<div>
 							<h6 className='name-type  name-style'>
-								<i>
-									By <b>{username}</b>
-								</i>
+								<i>By {username}</i>
 							</h6>
 						</div>
 						<div>

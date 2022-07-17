@@ -48,7 +48,7 @@ const Profile = () => {
 											<b>{loginedUser?.name}</b>
 										</h6>
 										{loginedUser?.roles[0].role !== ROLE.ROLE_ADMIN && (
-											<Link to={"editprofile/" + loginedUser?.user_id}>
+											<Link to='/editprofile'>
 												<FontAwesomeIcon icon={faEdit} />
 											</Link>
 										)}
@@ -91,7 +91,7 @@ const Profile = () => {
 														</div>
 														<div className='col-6 mb-3'>
 															<h6>
-																<b>YOB</b>
+																<b>Year of Birth</b>
 															</h6>
 															<p className='text-muted'>{loginedUser?.yob}</p>
 														</div>

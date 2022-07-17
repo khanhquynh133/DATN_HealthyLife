@@ -1,11 +1,10 @@
 /** @format */
 
 import {
-	faClose,
 	faEdit,
 	faEraser,
+	faHeart,
 	faHeartCircleMinus,
-	faHeartCirclePlus,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
@@ -73,16 +72,40 @@ const FoodDetails = () => {
 			{detailRecipe && detailRecipe?.recipe?.id_recipe == id && (
 				<div className='row mb-5 my-5'>
 					<div className='col-md-7 pr-md-4'>
-						<h1 className='type-name my-3'>{detailRecipe.recipe.name}</h1>
+						<h1 className='type-name my-3'>
+							{detailRecipe.recipe.name}{" "}
+							{loginedUser?.roles[0]?.role === ROLE.ROLE_USER && (
+								<>
+									<button
+										className='btn btn-danger rounded-pill my-3 me-md-2 name-type'
+										onClick={handleFav}>
+										{detailRecipe?.favorite ? (
+											<>
+												<FontAwesomeIcon icon={faHeartCircleMinus} />
+											</>
+										) : (
+											<>
+												<FontAwesomeIcon icon={faHeart} />
+											</>
+										)}
+									</button>
+								</>
+							)}
+						</h1>
+
 						<h5 className='name-style my-3'>
-							🖋 Description: {detailRecipe.recipe.description}
+							🖋<b> Description: </b>
+							{detailRecipe.recipe.description}
 						</h5>
 						<h5 className='name-style my-3'>
-							👥 Servings: {detailRecipe.recipe.servings} &nbsp; &nbsp; &nbsp;
-							&nbsp;⏳ Total time: {""}
+							👥 <b>Servings:</b> {detailRecipe.recipe.servings} &nbsp; &nbsp;
+							&nbsp; &nbsp;⏳ <b> Total time: </b> {""}
 							{detailRecipe.recipe.time} minutes
 						</h5>
-						<h4 className='name-style my-3'> 📜 Ingredients </h4>
+						<h4 className='name-style my-3'>
+							{" "}
+							📜 <b> Ingredients </b>
+						</h4>
 						<ul>
 							{detailRecipe.recipe.ingredients.map((ingredient, index) => (
 								<li key={index} className='name-style my-3'>
@@ -90,11 +113,14 @@ const FoodDetails = () => {
 								</li>
 							))}
 						</ul>
-						<h4 className='name-style my-3'> 🍴 Directions </h4>
+						<h4 className='name-style my-3'>
+							{" "}
+							🍴 <b>Directions </b>
+						</h4>
 						<ul>
 							{detailRecipe.recipe.directions.map((direction, index) => (
 								<li key={index} className='name-style my-3'>
-									Step {direction.step}: {direction.direction}
+									<b>Step {direction.step}: </b> {direction.direction}
 								</li>
 							))}
 						</ul>
@@ -113,7 +139,7 @@ const FoodDetails = () => {
 							<>
 								<Link
 									to={`/editfood/${id}`}
-									className='btn btn-danger rounded-pill my-3 me-md-2 name-type'>
+									className='btn btn-primary rounded-pill my-3 me-md-2 name-type'>
 									<FontAwesomeIcon icon={faEdit} />
 									<span> Edit </span>
 								</Link>
@@ -126,25 +152,6 @@ const FoodDetails = () => {
 							</>
 						) : (
 							""
-						)}
-						{loginedUser?.roles[0]?.role === ROLE.ROLE_USER && (
-							<>
-								<button
-									className='btn btn-danger rounded-pill my-3 me-md-2 name-type'
-									onClick={handleFav}>
-									{detailRecipe?.favorite ? (
-										<>
-											<FontAwesomeIcon icon={faHeartCircleMinus} />
-											<span> Unfavorite </span>
-										</>
-									) : (
-										<>
-											<FontAwesomeIcon icon={faHeartCirclePlus} />
-											<span> Favorite </span>
-										</>
-									)}
-								</button>
-							</>
 						)}
 
 						{detailRecipe?.creator?.id_user === loginedUser?.id_user && (

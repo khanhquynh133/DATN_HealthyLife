@@ -51,26 +51,28 @@ const DetailMember = () => {
 					<div className='col-md-8 '>
 						<ul className='list-group '>
 							<li className='list-group-item list-group-item-action'>
-								Username:
-								<span className='fw-bold name-style'> {user?.username} </span>
+								<b>Username:</b>
+								<span className='name-style'> {user?.username} </span>
 							</li>
 							<li className='list-group-item list-group-item-action'>
-								Name:<span className='fw-bold name-style'> {user?.name} </span>
+								<b>Name: </b>
+								<span className='name-style'> {user?.name} </span>
 							</li>
 							<li className='list-group-item list-group-item-action'>
-								Email:
-								<span className='fw-bold name-style'> {user?.email} </span>
+								<b>Email:</b>
+								<span className='name-style'> {user?.email} </span>
 							</li>
 							<li className='list-group-item list-group-item-action'>
-								Gender:
-								<span className='fw-bold name-style'> {user?.gender} </span>
+								<b>Gender:</b>
+								<span className='name-style'> {user?.gender} </span>
 							</li>
 							<li className='list-group-item list-group-item-action'>
-								Phone:
-								<span className='fw-bold name-style'> {user?.phone} </span>
+								<b>Phone:</b>
+								<span className='name-style'> {user?.phone} </span>
 							</li>
 							<li className='list-group-item list-group-item-action'>
-								YOB:<span className='fw-bold name-style'> {user?.yob} </span>
+								<b>YOB:</b>
+								<span className='name-style'> {user?.yob} </span>
 							</li>
 						</ul>
 					</div>

@@ -32,7 +32,7 @@ const Header = () => {
 	return (
 		<nav className='navbar navbar-expand navbar-light bg-white py-2 sticky-top'>
 			<div className='container'>
-				<Link to='/' className='navbar-brand'>
+				<Link to='/' className='navbar-brand-2'>
 					<img src={Logo} alt='logo' />
 					<img src={Slogan} alt='slogan' />
 				</Link>
@@ -118,7 +118,7 @@ const Header = () => {
 						{loginedUser?.id_user ? (
 							<>
 								<button
-									className='btn btn-warning rounded-pill name-style'
+									className='btn btn-warning rounded-pill fw-bold name-style'
 									onClick={handleLogout}>
 									Logout
 								</button>
@@ -126,7 +126,7 @@ const Header = () => {
 						) : (
 							<>
 								<Link to='/signin' className='nav-link'>
-									<button className='btn btn-warning rounded-pill name-style'>
+									<button className='btn btn-warning rounded-pill fw-bold name-style'>
 										Sign In
 									</button>
 								</Link>

@@ -66,6 +66,21 @@ const EditMember = () => {
 								className='row mb-5 my-2 name-style'
 								onSubmit={handleSubmit(submitForm)}>
 								<div className='mb-2'>
+									<span classname='mb-1'>
+										<b> Name: </b>
+									</span>
+									<input
+										type='text'
+										className='form-control '
+										placeholder='Name'
+										defaultValue={user?.name}
+										{...register("name")}
+									/>
+								</div>
+								<div className='mb-2'>
+									<span classname='mb-1'>
+										<b> UserName: </b>
+									</span>
 									<input
 										type='text'
 										className='form-control '
@@ -76,6 +91,9 @@ const EditMember = () => {
 									/>
 								</div>
 								<div className='mb-2'>
+									<span classname='mb-1'>
+										<b> Email: </b>
+									</span>
 									<input
 										type='email'
 										className='form-control '
@@ -86,6 +104,9 @@ const EditMember = () => {
 									/>
 								</div>
 								<div className='mb-2'>
+									<span classname='mb-1'>
+										<b> Image URL: </b>
+									</span>
 									<input
 										type='text'
 										className='form-control '
@@ -96,16 +117,9 @@ const EditMember = () => {
 								</div>
 
 								<div className='mb-2'>
-									<input
-										type='text'
-										className='form-control '
-										placeholder='Name'
-										defaultValue={user?.name}
-										{...register("name")}
-									/>
-								</div>
-								<div className='mb-2'>
-									<label>Gender: </label>
+									<span classname='mb-1'>
+										<b> Gender: </b>
+									</span>
 									<div className='form-check'>
 										<label htmlFor='Female'>
 											<input
@@ -136,6 +150,9 @@ const EditMember = () => {
 									</div>
 								</div>
 								<div className='mb-2'>
+									<span classname='mb-1'>
+										<b> Phone: </b>
+									</span>
 									<input
 										type='text'
 										className='form-control'
@@ -145,6 +162,9 @@ const EditMember = () => {
 									/>
 								</div>
 								<div className='mb-2'>
+									<span classname='mb-1'>
+										<b> Year of Birth: </b>
+									</span>
 									<input
 										type='text'
 										className='form-control'

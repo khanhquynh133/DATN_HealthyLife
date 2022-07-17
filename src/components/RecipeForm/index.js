@@ -169,7 +169,7 @@ const RecipeForm = (props) => {
 						/>
 					)}
 					<h5 className='recipe-name '>
-						<b>🖼 Image URL</b>
+						<b>📎 Image URL</b>
 					</h5>
 					<input className='mb-5 image-input' {...register("image")} />
 					<h5 className='recipe-name'>
